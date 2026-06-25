@@ -4,8 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
+import Category from "@/models/Category";
 import { formatPrice } from "@/lib/utils";
 import Badge from "@/components/ui/Badge";
+
+// Ensure Category model is registered for populate
+void Category;
 
 export const dynamic = "force-dynamic";
 
