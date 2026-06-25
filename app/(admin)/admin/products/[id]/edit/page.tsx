@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import ImageUploader from "@/components/admin/ImageUploader";
 import toast from "react-hot-toast";
 import { X, Plus } from "lucide-react";
 
@@ -223,36 +224,21 @@ export default function EditProductPage() {
 
           {/* Images */}
           <Section title="Product Images">
-            <div className="flex gap-2 mb-4">
+            <ImageUploader
+              images={form.images}
+              onChange={(imgs) => update("images", imgs)}
+            />
+            {/* Fallback: paste URL manually */}
+            <div className="mt-4 flex gap-2">
               <input
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="Paste image URL and click Add"
-                className="flex-1 px-4 py-2.5 bg-white border border-border rounded-md text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold"
+                placeholder="Or paste image URL"
+                className="flex-1 px-4 py-2.5 bg-white border border-border rounded-md text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold text-sm"
                 onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addImage(); } }}
               />
-              <Button type="button" size="sm" onClick={addImage}><Plus size={16} className="mr-1" /> Add</Button>
+              <Button type="button" size="sm" onClick={addImage}><Plus size={16} /></Button>
             </div>
-
-            {form.images.length > 0 && (
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-                {form.images.map((img, i) => (
-                  <div key={i} className="relative aspect-square rounded-lg overflow-hidden border border-border group">
-                    <Image src={img.url} alt={`Image ${i + 1}`} fill className="object-cover" />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(i)}
-                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={14} />
-                    </button>
-                    {i === 0 && (
-                      <span className="absolute bottom-1 left-1 bg-gold text-white text-[10px] px-1.5 py-0.5 rounded">Main</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
           </Section>
 
           {/* Actions */}
