@@ -166,7 +166,7 @@ export default async function ProductDetailPage({
               <div>
                 <h2 className="font-display text-xl text-gold mb-4">Shipping & Returns</h2>
                 <ul className="text-ivory/70 space-y-2 text-sm">
-                  <li>• Free shipping above ₹5,000</li>
+                  <li>• Free shipping above ₹499</li>
                   <li>• Standard: 5-7 business days</li>
                   <li>• Express: 2-3 business days</li>
                   <li>• 30-day return policy</li>

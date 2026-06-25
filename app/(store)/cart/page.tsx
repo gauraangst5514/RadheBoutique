@@ -109,13 +109,13 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-ivory/80">
                   <span>Shipping</span>
-                  <span>{total >= 5000 ? "FREE" : formatPrice(99)}</span>
+                  <span>{total >= 499 ? "FREE" : formatPrice(99)}</span>
                 </div>
                 <div className="border-t border-border pt-3">
                   <div className="flex justify-between text-xl font-bold">
                     <span>Total</span>
                     <span className="text-gold">
-                      {formatPrice(total + (total >= 5000 ? 0 : 99))}
+                      {formatPrice(total + (total >= 499 ? 0 : 99))}
                     </span>
                   </div>
                 </div>
@@ -134,9 +134,9 @@ export default function CartPage() {
                 </Button>
               </Link>
 
-              {total < 5000 && (
+              {total < 499 && (
                 <p className="text-xs text-ivory/60 text-center mt-4">
-                  Add {formatPrice(5000 - total)} more for FREE shipping
+                  Add {formatPrice(499 - total)} more for FREE shipping
                 </p>
               )}
             </div>

@@ -34,7 +34,7 @@ export interface ISiteSettings {
 const settingsSchema = new Schema<ISiteSettings>(
   {
     announcementEnabled: { type: Boolean, default: true },
-    announcementText: { type: String, default: "✨ Free shipping on orders above ₹5,000 — Shop Now!" },
+    announcementText: { type: String, default: "✨ Free shipping on orders above ₹499 — Shop Now!" },
     announcementLink: { type: String, default: "/shop" },
 
     heroHeadline: { type: String, default: "Jewellery That" },

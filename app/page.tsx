@@ -105,7 +105,7 @@ export default async function HomePage() {
             {[
               { icon: "✦", title: "Handcrafted", sub: "Master artisans" },
               { icon: "◈", title: "BIS Hallmarked", sub: "Certified purity" },
-              { icon: "❉", title: "Free Shipping", sub: "Above ₹5,000" },
+              { icon: "❉", title: "Free Shipping", sub: "Above ₹499" },
               { icon: "↺", title: "Easy Returns", sub: "30-day policy" },
             ].map((v) => (
               <div key={v.title} className="reveal">

@@ -270,7 +270,7 @@ export default function ContactPage() {
                 },
                 {
                   q: "Do you ship across India?",
-                  a: "Yes, we ship pan-India with insured delivery. Orders above ₹5000 get free shipping. Standard delivery takes 5-7 days; express takes 2-3 days.",
+                  a: "Yes, we ship pan-India with insured delivery. Orders above ₹499 get free shipping. Standard delivery takes 5-7 days; express takes 2-3 days.",
                 },
               ].map((faq, i) => (
                 <details

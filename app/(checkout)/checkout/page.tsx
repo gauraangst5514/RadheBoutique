@@ -53,7 +53,7 @@ export default function CheckoutPage() {
   }
 
   const subtotal = getCartTotal();
-  const shipping = subtotal >= 5000 ? 0 : 99;
+  const shipping = subtotal >= 499 ? 0 : 99;
   const total = subtotal + shipping;
 
   // Success animation screen
@@ -272,9 +272,9 @@ export default function CheckoutPage() {
                 {isSubmitting ? "Placing Order..." : "Place Order"}
               </Button>
 
-              {subtotal < 5000 && (
+              {subtotal < 499 && (
                 <p className="text-xs text-ivory/50 text-center mt-3">
-                  Add {formatPrice(5000 - subtotal)} more for FREE shipping
+                  Add {formatPrice(499 - subtotal)} more for FREE shipping
                 </p>
               )}
             </div>

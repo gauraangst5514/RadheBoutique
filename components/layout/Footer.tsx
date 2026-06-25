@@ -90,7 +90,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-ivory mb-4">Customer Care</h4>
             <ul className="space-y-2 text-sm text-ivory/60">
-              <li>Free Shipping above ₹5000</li>
+              <li>Free Shipping above ₹499</li>
               <li>30-Day Returns</li>
               <li>BIS Hallmarked</li>
               <li>

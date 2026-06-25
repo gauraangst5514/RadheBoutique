@@ -4,7 +4,7 @@ import Product from "@/models/Product";
 import { generateOrderNumber } from "@/lib/orderNumber";
 import { CreateOrderPayload, IOrder, OrderStatus, PaymentStatus } from "@/types";
 
-const FREE_SHIPPING_THRESHOLD = 5000;
+const FREE_SHIPPING_THRESHOLD = 499;
 
 interface BuiltOrderItem {
   productId: any;

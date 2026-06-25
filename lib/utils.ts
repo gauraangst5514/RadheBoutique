@@ -80,7 +80,7 @@ export function validatePincode(pincode: string): boolean {
 }
 
 export function calculateShipping(subtotal: number, method: "standard" | "express"): number {
-  if (subtotal >= 5000) return 0;
+  if (subtotal >= 499) return 0;
   return method === "express" ? 199 : 99;
 }
 
