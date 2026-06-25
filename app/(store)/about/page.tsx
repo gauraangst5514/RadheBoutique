@@ -7,15 +7,6 @@ import WhatsAppButton from "@/components/layout/WhatsAppButton";
 const INSTAGRAM = process.env.NEXT_PUBLIC_BRAND_INSTAGRAM || "@radheboutique";
 const INSTAGRAM_URL = `https://instagram.com/${INSTAGRAM.replace("@", "")}`;
 
-const instagramPosts = [
-  "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&h=600&fit=crop",
-];
-
 const milestones = [
   { number: "10+", label: "Years of Craftsmanship" },
   { number: "5000+", label: "Happy Customers" },
@@ -162,72 +153,25 @@ export default function AboutPage() {
               </a>
             </div>
 
-            {/* Instagram Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {instagramPosts.map((img, i) => (
-                <a
-                  key={i}
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative aspect-square rounded-lg overflow-hidden"
-                >
-                  <Image
-                    src={img}
-                    alt={`Instagram post ${i + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+            {/* Instagram Reels - Real Embeds */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                "https://www.instagram.com/reel/DTABLGLk-Tc/",
+                "https://www.instagram.com/reel/DTSdg3EEz_C/",
+                "https://www.instagram.com/reel/DZ5NIvQN1tR/",
+                "https://www.instagram.com/reel/DZ27jw-T-1N/",
+              ].map((url, i) => (
+                <div key={i} className="rounded-xl overflow-hidden border border-border bg-white">
+                  <iframe
+                    src={`${url}embed/`}
+                    className="w-full aspect-[9/16]"
+                    frameBorder="0"
+                    scrolling="no"
+                    allowTransparent
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-bg/0 group-hover:bg-bg/60 transition-colors flex items-center justify-center">
-                    <span className="text-gold opacity-0 group-hover:opacity-100 transition-opacity font-semibold text-lg">
-                      View on IG
-                    </span>
-                  </div>
-                </a>
+                </div>
               ))}
-            </div>
-
-            {/* Featured Reels Section */}
-            <div className="mt-16">
-              <div className="text-center mb-8">
-                <h3 className="font-display text-2xl text-gold mb-2">Featured Reels</h3>
-                <p className="text-ivory/60 text-sm">Watch our latest styling videos and behind-the-scenes content</p>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { thumb: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=700&fit=crop", title: "Bridal Collection 2025" },
-                  { thumb: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=700&fit=crop", title: "Making of a Necklace" },
-                  { thumb: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=700&fit=crop", title: "Styling Tips" },
-                  { thumb: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=700&fit=crop", title: "Customer Unboxing" },
-                ].map((reel, i) => (
-                  <a
-                    key={i}
-                    href={INSTAGRAM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative aspect-[9/16] rounded-lg overflow-hidden bg-surface border border-border hover:border-gold transition-all"
-                  >
-                    <Image
-                      src={reel.thumb}
-                      alt={reel.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
-                    {/* Play button */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-gold/90 flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
-                      <p className="text-ivory text-xs font-semibold truncate">{reel.title}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </section>
