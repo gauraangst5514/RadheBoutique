@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (isLoggedIn && (pathname === "/login" || pathname === "/register")) {
-    return NextResponse.redirect(new URL("/account", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
