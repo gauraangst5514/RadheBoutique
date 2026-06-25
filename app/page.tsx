@@ -57,46 +57,46 @@ export default async function HomePage() {
       <main className="min-h-screen">
 
         {/* ─── HERO ─── */}
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-16">
-          <div className="container grid lg:grid-cols-2 items-center gap-12 relative z-10">
+        <section className="relative overflow-hidden py-12 md:py-20">
+          <div className="container grid lg:grid-cols-2 items-center gap-8 lg:gap-12 relative z-10">
             <div>
               <div className="animate-fade-up">
-                <p className="text-gold text-xs tracking-[0.35em] uppercase mb-4 font-semibold">
+                <p className="text-gold text-[10px] md:text-xs tracking-[0.35em] uppercase mb-3 font-semibold">
                   New Collection 2026
                 </p>
               </div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-ivory leading-[1.1] mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-ivory leading-[1.1] mb-4 animate-fade-up" style={{ animationDelay: "0.1s" }}>
                 {hero.headline}<br />
                 <span className="gradient-gold">{hero.subheadline}</span>
               </h1>
-              <p className="text-ivory/60 md:text-lg max-w-md mb-10 leading-relaxed animate-fade-up" style={{ animationDelay: "0.2s" }}>
+              <p className="text-ivory/60 text-sm md:text-base max-w-md mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: "0.2s" }}>
                 {hero.description}
               </p>
-              <div className="flex gap-4 flex-col sm:flex-row animate-fade-up" style={{ animationDelay: "0.3s" }}>
-                <Link href={hero.cta1Link} className="btn-sheen bg-gold text-white px-9 py-3.5 rounded-full font-semibold tracking-wide transition-all hover:shadow-lg hover:shadow-gold/20 text-center">
+              <div className="flex gap-3 flex-col sm:flex-row animate-fade-up" style={{ animationDelay: "0.3s" }}>
+                <Link href={hero.cta1Link} className="btn-sheen bg-gold text-white px-8 py-3 rounded-full font-semibold tracking-wide transition-all hover:shadow-lg hover:shadow-gold/20 text-center text-sm">
                   {hero.cta1Text}
                 </Link>
-                <Link href={hero.cta2Link} className="border border-border text-ivory hover:border-gold hover:text-gold px-9 py-3.5 rounded-full font-semibold tracking-wide transition-all text-center">
+                <Link href={hero.cta2Link} className="border border-border text-ivory hover:border-gold hover:text-gold px-8 py-3 rounded-full font-semibold tracking-wide transition-all text-center text-sm">
                   {hero.cta2Text}
                 </Link>
               </div>
             </div>
 
-            <div className="hidden lg:block relative animate-scale-in" style={{ animationDelay: "0.2s" }}>
-              <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shadow-black/10">
+            {/* Image — shown on all screens */}
+            <div className="relative animate-scale-in" style={{ animationDelay: "0.2s" }}>
+              <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl shadow-black/10">
                 <Image src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&h=1200&fit=crop" alt="Luxury jewellery" fill priority className="object-cover" />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-border animate-float">
-                <p className="text-gold font-display text-2xl">10+</p>
-                <p className="text-ivory/60 text-xs">Years of Artistry</p>
+              <div className="absolute -bottom-3 -left-3 bg-white rounded-xl shadow-lg p-3 border border-border animate-float hidden sm:block">
+                <p className="text-gold font-display text-xl leading-none">10+</p>
+                <p className="text-ivory/60 text-[10px]">Years of Artistry</p>
               </div>
-              <div className="absolute top-6 -right-2 bg-gold text-white rounded-full px-4 py-2 text-xs font-semibold shadow-lg">
+              <div className="absolute top-4 -right-1 sm:-right-2 bg-gold text-white rounded-full px-3 py-1.5 text-[10px] font-semibold shadow-lg">
                 ✦ Handcrafted
               </div>
             </div>
           </div>
-          <div className="absolute top-1/3 right-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-56 h-56 bg-sand/50 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/3 right-0 w-52 h-52 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
         </section>
 
         {/* ─── VALUES ─── */}
@@ -118,16 +118,16 @@ export default async function HomePage() {
         </section>
 
         {/* ─── FEATURED CARD (editable from admin) ─── */}
-        <section className="section container">
-          <div className="reveal bg-white border border-border rounded-3xl overflow-hidden grid md:grid-cols-2 shadow-sm hover:shadow-lg transition-shadow duration-500">
+        <section className="py-12 md:py-20 container">
+          <div className="reveal bg-white border border-border rounded-2xl overflow-hidden grid md:grid-cols-2 shadow-sm hover:shadow-lg transition-shadow duration-500">
             <div className="relative aspect-[4/3] md:aspect-auto zoom-hover">
               <Image src={featured.image} alt={featured.title} fill className="object-cover" />
             </div>
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3 font-semibold">{featured.subtitle}</p>
-              <h2 className="font-display text-3xl md:text-4xl mb-4">{featured.title}</h2>
-              <p className="text-ivory/55 mb-8 leading-relaxed">{featured.description}</p>
-              <Link href={featured.link} className="btn-sheen bg-gold text-white px-8 py-3 rounded-full font-semibold self-start hover:shadow-lg hover:shadow-gold/20 transition-all">
+            <div className="p-6 md:p-10 flex flex-col justify-center">
+              <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-2 font-semibold">{featured.subtitle}</p>
+              <h2 className="font-display text-2xl md:text-3xl mb-3">{featured.title}</h2>
+              <p className="text-ivory/55 mb-6 leading-relaxed text-sm">{featured.description}</p>
+              <Link href={featured.link} className="btn-sheen bg-gold text-white px-6 py-2.5 rounded-full font-semibold self-start hover:shadow-lg hover:shadow-gold/20 transition-all text-sm">
                 Explore Collection
               </Link>
             </div>
@@ -135,27 +135,27 @@ export default async function HomePage() {
         </section>
 
         {/* ─── CATEGORIES ─── */}
-        <section className="section container">
-          <div className="text-center mb-12 reveal">
-            <p className="text-gold text-xs tracking-[0.3em] uppercase mb-2 font-semibold">Browse</p>
-            <h2 className="heading-1">Shop by Category</h2>
+        <section className="py-12 md:py-20 container">
+          <div className="text-center mb-8 reveal">
+            <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Browse</p>
+            <h2 className="font-display text-2xl md:text-3xl">Shop by Category</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
             {categories.map((cat, i) => (
-              <Link key={cat.name} href={`/shop?category=${cat.name.toLowerCase()}`} className="reveal group relative aspect-[3/4] rounded-2xl overflow-hidden card-hover zoom-hover border border-border" style={{ transitionDelay: `${i * 60}ms` }}>
+              <Link key={cat.name} href={`/shop?category=${cat.name.toLowerCase()}`} className="reveal group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border" style={{ transitionDelay: `${i * 60}ms` }}>
                 <Image src={cat.img} alt={cat.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <h3 className="absolute bottom-5 left-5 font-display text-xl text-white group-hover:text-sand transition-colors">{cat.name}</h3>
+                <h3 className="absolute bottom-4 left-4 font-display text-lg md:text-xl text-white group-hover:text-sand transition-colors">{cat.name}</h3>
               </Link>
             ))}
           </div>
         </section>
 
         {/* ─── TESTIMONIAL ─── */}
-        <section className="section bg-white border-y border-border">
+        <section className="py-12 md:py-20 bg-white border-y border-border">
           <div className="container text-center max-w-2xl mx-auto reveal">
-            <WarliDivider className="mb-8" />
-            <blockquote className="font-serif-accent text-2xl md:text-3xl text-ivory/80 mb-6 leading-snug">
+            <WarliDivider className="mb-6" />
+            <blockquote className="font-serif-accent text-xl md:text-2xl text-ivory/80 mb-5 leading-snug">
               &ldquo;The most beautiful necklace I&apos;ve ever owned. You can feel the love in every detail.&rdquo;
             </blockquote>
             <p className="text-gold font-semibold text-sm">Ananya Mehta</p>
@@ -164,13 +164,13 @@ export default async function HomePage() {
         </section>
 
         {/* ─── CTA ─── */}
-        <section className="section container">
+        <section className="py-12 md:py-20 container">
           <div className="reveal text-center max-w-lg mx-auto">
-            <h3 className="font-display text-2xl mb-3">Begin Your Journey</h3>
-            <p className="text-ivory/50 text-sm mb-8">Browse our collection or message us on WhatsApp for a personalised experience.</p>
-            <div className="flex gap-3 justify-center flex-wrap">
-              <Link href="/shop" className="btn-sheen bg-gold text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-gold/20 transition-all">Explore Shop</Link>
-              <Link href="/contact" className="border border-border text-ivory hover:border-gold hover:text-gold px-8 py-3 rounded-full font-semibold transition-all">Contact Us</Link>
+            <h3 className="font-display text-xl md:text-2xl mb-2">Begin Your Journey</h3>
+            <p className="text-ivory/50 text-sm mb-6">Browse our collection or message us on WhatsApp for a personalised experience.</p>
+            <div className="flex gap-3 justify-center flex-col sm:flex-row">
+              <Link href="/shop" className="btn-sheen bg-gold text-white px-7 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-gold/20 transition-all text-sm">Explore Shop</Link>
+              <Link href="/contact" className="border border-border text-ivory hover:border-gold hover:text-gold px-7 py-2.5 rounded-full font-semibold transition-all text-sm">Contact Us</Link>
             </div>
           </div>
         </section>
