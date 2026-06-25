@@ -16,13 +16,6 @@ const instagramPosts = [
   "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&h=600&fit=crop",
 ];
 
-const values = [
-  { icon: "✨", title: "Handcrafted", desc: "Every piece made by master artisans with decades of experience" },
-  { icon: "💎", title: "Certified", desc: "BIS Hallmarked gold and GIA certified diamonds" },
-  { icon: "🎨", title: "Bespoke Design", desc: "Custom designs tailored to your vision and style" },
-  { icon: "🌿", title: "Ethically Sourced", desc: "Conflict-free stones and responsibly mined metals" },
-];
-
 const milestones = [
   { number: "10+", label: "Years of Craftsmanship" },
   { number: "5000+", label: "Happy Customers" },
@@ -115,30 +108,6 @@ export default function AboutPage() {
                 <div key={m.label}>
                   <p className="font-display text-4xl md:text-5xl text-gold mb-2">{m.number}</p>
                   <p className="text-ivory/60 text-sm">{m.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Values */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="font-display text-3xl md:text-4xl text-gold mb-4">What Sets Us Apart</h2>
-              <p className="text-ivory/60 max-w-2xl mx-auto">
-                Every piece from Radhe Boutique is a promise of quality, authenticity, and timeless beauty.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.map((v) => (
-                <div
-                  key={v.title}
-                  className="bg-surface border border-border rounded-lg p-6 text-center hover:border-gold/50 transition-colors"
-                >
-                  <div className="text-4xl mb-4">{v.icon}</div>
-                  <h3 className="font-display text-xl text-gold mb-2">{v.title}</h3>
-                  <p className="text-ivory/60 text-sm">{v.desc}</p>
                 </div>
               ))}
             </div>
