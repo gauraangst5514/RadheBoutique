@@ -2,22 +2,25 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import toast from "react-hot-toast";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
+  const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch("/api/settings")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success) setSettings(d.data);
-      })
-      .finally(() => setLoading(false));
+    Promise.all([
+      fetch("/api/settings").then((r) => r.json()),
+      fetch("/api/categories").then((r) => r.json()),
+    ]).then(([settingsData, catData]) => {
+      if (settingsData.success) setSettings(settingsData.data);
+      if (catData.success) setCategories(catData.data);
+    }).finally(() => setLoading(false));
   }, []);
 
   const handleSave = async () => {
@@ -198,10 +201,58 @@ export default function AdminSettingsPage() {
             </div>
           </Section>
 
+          {/* Category Images */}
+          <Section title="Category Images" desc="Change the thumbnail images shown on the landing page 'Shop by Category' grid.">
+            <div className="space-y-4">
+              {categories.map((cat, i) => (
+                <div key={cat._id} className="flex items-center gap-4">
+                  <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-border flex-shrink-0 bg-sand/30">
+                    {cat.image?.url && (
+                      <Image src={cat.image.url} alt={cat.name} fill className="object-cover" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium mb-1">{cat.name}</p>
+                    <input
+                      value={cat.image?.url || ""}
+                      onChange={(e) => {
+                        const updated = [...categories];
+                        updated[i] = { ...updated[i], image: { ...updated[i].image, url: e.target.value } };
+                        setCategories(updated);
+                      }}
+                      placeholder="Image URL"
+                      className="w-full px-3 py-1.5 bg-white border border-border rounded-md text-ivory text-xs focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold"
+                    />
+                  </div>
+                </div>
+              ))}
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={async () => {
+                  try {
+                    for (const cat of categories) {
+                      await fetch(`/api/categories/${cat._id}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ image: cat.image }),
+                      });
+                    }
+                    toast.success("Category images saved!");
+                  } catch {
+                    toast.error("Failed to save categories");
+                  }
+                }}
+              >
+                Save Category Images
+              </Button>
+            </div>
+          </Section>
+
           {/* Save */}
-          <div className="flex justify-end pt-4 border-t border-border">
+          <div className="flex justify-end pt-4 border-t border-border pb-20 md:pb-0">
             <Button onClick={handleSave} isLoading={saving}>
-              Save All Changes
+              Save All Settings
             </Button>
           </div>
         </div>

@@ -138,11 +138,11 @@ export default function EditProductPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-ivory py-8 px-4">
+    <div className="min-h-screen bg-bg text-ivory py-8 px-4 pb-24">
       <div className="container mx-auto max-w-3xl">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-display text-3xl">Edit Product</h1>
-          <Link href="/admin/products" className="text-gold hover:underline text-sm">← Back to Products</Link>
+          <Link href="/admin/products" className="text-gold hover:underline text-sm">← Back</Link>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -242,7 +242,7 @@ export default function EditProductPage() {
           </Section>
 
           {/* Actions */}
-          <div className="flex justify-between pt-4 border-t border-border">
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border p-4 flex justify-between z-40 md:static md:border-t-0 md:p-0 md:pt-4 md:border-t md:border-border">
             <Button
               type="button"
               variant="danger"
@@ -260,11 +260,11 @@ export default function EditProductPage() {
                 }
               }}
             >
-              Delete Product
+              Delete
             </Button>
             <div className="flex gap-3">
-              <Button type="button" variant="ghost" onClick={() => router.push("/admin/products")}>Cancel</Button>
-              <Button type="submit" isLoading={saving}>Save Changes</Button>
+              <Button type="button" variant="ghost" size="sm" onClick={() => router.push("/admin/products")}>Cancel</Button>
+              <Button type="submit" size="sm" isLoading={saving}>Save</Button>
             </div>
           </div>
         </form>

@@ -12,7 +12,7 @@ void Category;
 
 export const dynamic = "force-dynamic";
 
-const categories = [
+const defaultCategories = [
   { name: "Rings", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=600&fit=crop" },
   { name: "Necklaces", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop" },
   { name: "Earrings", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop" },
@@ -30,6 +30,7 @@ export default async function HomePage() {
 
   let s: any = {};
   let featuredProducts: any[] = [];
+  let categories: { name: string; slug: string; img: string }[] = [];
   try {
     await connectDB();
     const settings = await Settings.findOne().lean();
@@ -39,6 +40,16 @@ export default async function HomePage() {
       featuredProducts = await Product.find({ isActive: true }).limit(4).lean();
     }
     featuredProducts = JSON.parse(JSON.stringify(featuredProducts));
+
+    const dbCategories = await Category.find({ isActive: true }).lean();
+    categories = JSON.parse(JSON.stringify(dbCategories)).map((c: any) => ({
+      name: c.name,
+      slug: c.slug,
+      img: c.image?.url || defaultCategories.find((d) => d.name === c.name)?.img || "",
+    }));
+    if (categories.length === 0) {
+      categories = defaultCategories.map((c) => ({ ...c, slug: c.name.toLowerCase() }));
+    }
   } catch {}
 
   const hero = {
@@ -194,7 +205,7 @@ export default async function HomePage() {
             {categories.map((cat, i) => (
               <Link
                 key={cat.name}
-                href={`/shop?category=${cat.name.toLowerCase()}`}
+                href={`/shop?category=${cat.slug}`}
                 className="reveal group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
