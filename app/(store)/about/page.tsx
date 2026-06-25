@@ -167,7 +167,6 @@ export default function AboutPage() {
                     className="w-full aspect-[9/16]"
                     frameBorder="0"
                     scrolling="no"
-                    allowTransparent
                     loading="lazy"
                   />
                 </div>
