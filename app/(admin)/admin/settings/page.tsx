@@ -202,14 +202,43 @@ export default function AdminSettingsPage() {
           </Section>
 
           {/* Category Images */}
-          <Section title="Category Images" desc="Change the thumbnail images shown on the landing page 'Shop by Category' grid.">
+          <Section title="Category Images" desc="Change the thumbnail images shown on the landing page. Click to upload or paste a URL.">
             <div className="space-y-4">
               {categories.map((cat, i) => (
                 <div key={cat._id} className="flex items-center gap-4">
-                  <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-border flex-shrink-0 bg-sand/30">
+                  <div
+                    className="relative w-16 h-16 rounded-lg overflow-hidden border border-border flex-shrink-0 bg-sand/30 cursor-pointer group"
+                    onClick={() => {
+                      const input = document.createElement("input");
+                      input.type = "file";
+                      input.accept = "image/*";
+                      input.onchange = async (e: any) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        const formData = new FormData();
+                        formData.append("file", file);
+                        toast.loading("Uploading...", { id: `cat-${cat._id}` });
+                        try {
+                          const res = await fetch("/api/upload", { method: "POST", body: formData });
+                          const data = await res.json();
+                          if (!data.success) throw new Error(data.error);
+                          const updated = [...categories];
+                          updated[i] = { ...updated[i], image: { url: data.data.url, publicId: data.data.publicId } };
+                          setCategories(updated);
+                          toast.success("Image uploaded!", { id: `cat-${cat._id}` });
+                        } catch (err: any) {
+                          toast.error(err.message || "Upload failed", { id: `cat-${cat._id}` });
+                        }
+                      };
+                      input.click();
+                    }}
+                  >
                     {cat.image?.url && (
                       <Image src={cat.image.url} alt={cat.name} fill className="object-cover" />
                     )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                      <span className="text-white opacity-0 group-hover:opacity-100 text-xs font-medium">Change</span>
+                    </div>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium mb-1">{cat.name}</p>
@@ -220,7 +249,7 @@ export default function AdminSettingsPage() {
                         updated[i] = { ...updated[i], image: { ...updated[i].image, url: e.target.value } };
                         setCategories(updated);
                       }}
-                      placeholder="Image URL"
+                      placeholder="Or paste image URL here"
                       className="w-full px-3 py-1.5 bg-white border border-border rounded-md text-ivory text-xs focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold"
                     />
                   </div>
