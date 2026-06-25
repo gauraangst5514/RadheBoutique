@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
+import Category from "@/models/Category";
 import { auth } from "@/lib/auth";
+import { isValidObjectId } from "@/lib/utils";
+
+// Ensure Category model is registered for populate
+void Category;
 
 export async function GET(
   request: NextRequest,
@@ -9,10 +14,13 @@ export async function GET(
 ) {
   try {
     await connectDB();
-    
-    const product = await Product.findOne({
-      $or: [{ _id: params.id }, { slug: params.id }],
-    }).populate("category");
+
+    // Build query: try by _id if valid ObjectId, otherwise by slug
+    const query = isValidObjectId(params.id)
+      ? { _id: params.id }
+      : { slug: params.id };
+
+    const product = await Product.findOne(query).populate("category");
 
     if (!product) {
       return NextResponse.json(
@@ -43,7 +51,7 @@ export async function PUT(
 
     await connectDB();
     const body = await request.json();
-    
+
     const product = await Product.findByIdAndUpdate(params.id, body, {
       new: true,
       runValidators: true,
@@ -60,7 +68,7 @@ export async function PUT(
   } catch (error: any) {
     console.error("Update product error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to update product" },
+      { success: false, error: error.message || "Failed to update product" },
       { status: 500 }
     );
   }
