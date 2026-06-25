@@ -8,6 +8,9 @@ import { useCartStore } from "@/store/cartStore";
 import { cn } from "@/lib/utils";
 import AnnouncementBar from "./AnnouncementBar";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
+
+const LOGO_URL = "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782393712/radhe-logo_1_1_vikvi1.png";
 
 interface NavbarProps {
   user?: { name?: string | null; role?: string } | null;
@@ -57,8 +60,9 @@ export default function Navbar({ user }: NavbarProps) {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Link href="/" className="font-display text-xl md:text-2xl text-gold hover:text-gold/80 transition-colors">
-              Radhe Boutique
+            <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <Image src={LOGO_URL} alt="Radhe Boutique" width={36} height={36} className="rounded-full" />
+              <span className="font-display text-xl md:text-2xl text-gold hidden sm:inline">Radhe Boutique</span>
             </Link>
 
             <div className="hidden md:flex items-center space-x-8">

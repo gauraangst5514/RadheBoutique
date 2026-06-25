@@ -1,5 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Instagram, Facebook } from "lucide-react";
+
+const LOGO_URL = "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782393712/radhe-logo_1_1_vikvi1.png";
 
 export default function Footer() {
   return (
@@ -8,7 +11,10 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <h3 className="font-display text-2xl text-gold mb-4">Radhe Boutique</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <Image src={LOGO_URL} alt="Radhe Boutique" width={40} height={40} className="rounded-full" />
+              <h3 className="font-display text-2xl text-gold">Radhe Boutique</h3>
+            </div>
             <p className="text-ivory/60 text-sm mb-4">
               Crafted for Eternity
             </p>

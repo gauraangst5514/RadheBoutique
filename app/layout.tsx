@@ -28,6 +28,10 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: "Radhe Boutique - Luxury Jewellery | Crafted for Eternity",
+  icons: {
+    icon: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782393712/radhe-logo_1_1_vikvi1.png",
+    apple: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782393712/radhe-logo_1_1_vikvi1.png",
+  },
   description:
     "Discover exquisite handcrafted jewellery at Radhe Boutique. From diamond rings to gold necklaces, each piece is crafted with precision and elegance. Shop certified, hallmarked jewellery with free shipping.",
   keywords: [
