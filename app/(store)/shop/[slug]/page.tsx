@@ -133,7 +133,7 @@ export default async function ProductDetailPage({
               <div className="grid grid-cols-3 gap-4 py-5 border-t border-border">
                 <div className="text-center">
                   <div className="text-gold text-xl mb-1">✦</div>
-                  <p className="text-xs text-ivory/55">BIS Hallmarked</p>
+                  <p className="text-xs text-ivory/55">Anti-Tarnish</p>
                 </div>
                 <div className="text-center">
                   <div className="text-gold text-xl mb-1">❉</div>

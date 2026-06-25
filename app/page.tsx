@@ -88,8 +88,8 @@ export default async function HomePage() {
 
               {/* Trust badges inline */}
               <div className="flex items-center gap-6 mt-10 text-ivory/40 text-xs animate-fade-up" style={{ animationDelay: "0.4s" }}>
-                <span className="flex items-center gap-1.5">✦ Handcrafted</span>
-                <span className="flex items-center gap-1.5">◈ Hallmarked</span>
+                <span className="flex items-center gap-1.5">✦ Anti-Tarnish</span>
+                <span className="flex items-center gap-1.5">◈ Long Lasting</span>
                 <span className="flex items-center gap-1.5">❉ Free Shipping</span>
               </div>
             </div>
@@ -117,15 +117,6 @@ export default async function HomePage() {
                     height={144}
                     className="object-cover w-full h-full"
                   />
-                </div>
-                {/* Stat card */}
-                <div className="absolute -top-2 -left-4 bg-white rounded-xl shadow-lg px-4 py-3 border border-border hidden sm:block">
-                  <p className="text-gold font-display text-2xl leading-none">10+</p>
-                  <p className="text-ivory/50 text-[10px] mt-0.5">Years of Artistry</p>
-                </div>
-                {/* Badge */}
-                <div className="absolute top-6 -right-2 bg-gold text-white rounded-full px-3 py-1.5 text-[10px] font-semibold shadow-md">
-                  ✦ BIS Certified
                 </div>
               </div>
             </div>
@@ -221,8 +212,8 @@ export default async function HomePage() {
         <section className="py-10 md:py-16 bg-white border-y border-border">
           <div className="container grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {[
-              { icon: "✦", title: "Handcrafted", desc: "By master artisans" },
-              { icon: "◈", title: "BIS Hallmarked", desc: "Certified 22K gold" },
+              { icon: "✦", title: "Anti-Tarnish", desc: "Long-lasting shine" },
+              { icon: "💎", title: "Premium Quality", desc: "Best in market" },
               { icon: "🚚", title: "Free Delivery", desc: "Orders above ₹499" },
               { icon: "↺", title: "Easy Returns", desc: "30-day policy" },
             ].map((v) => (

@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-border mt-20">
       <div className="container mx-auto px-6 md:px-8 lg:px-12 py-14 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -98,7 +98,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-ivory/60">
               <li>Free Shipping above ₹499</li>
               <li>30-Day Returns</li>
-              <li>BIS Hallmarked</li>
+              <li>Anti-Tarnish Quality</li>
               <li>
                 <a href={`mailto:${process.env.NEXT_PUBLIC_BRAND_EMAIL}`} className="hover:text-gold transition-colors">
                   {process.env.NEXT_PUBLIC_BRAND_EMAIL}
