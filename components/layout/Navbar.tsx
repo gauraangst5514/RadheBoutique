@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Heart, User, Search, Menu, X } from "lucide-react";
+import { ShoppingCart, Heart, User, Search, Menu, X, LogOut } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { cn } from "@/lib/utils";
 import AnnouncementBar from "./AnnouncementBar";
+import { signOut } from "next-auth/react";
 
 interface NavbarProps {
   user?: { name?: string | null; role?: string } | null;
@@ -93,6 +94,15 @@ export default function Navbar({ user }: NavbarProps) {
               <Link href={user ? "/account" : "/login"} className="text-ivory hover:text-gold transition-colors">
                 <User size={20} />
               </Link>
+              {user && (
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="text-ivory hover:text-gold transition-colors"
+                  title="Log out"
+                >
+                  <LogOut size={18} />
+                </button>
+              )}
               <button className="md:hidden text-ivory hover:text-gold" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
