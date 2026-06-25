@@ -54,7 +54,7 @@ export default function ProductsManager({ initialProducts }: { initialProducts: 
     setBusy(true);
     let successCount = 0;
 
-    for (const id of selected) {
+    for (const id of Array.from(selected)) {
       try {
         if (action === "delete") {
           const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
