@@ -242,9 +242,30 @@ export default function EditProductPage() {
           </Section>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-border">
-            <Button type="button" variant="ghost" onClick={() => router.push("/admin/products")}>Cancel</Button>
-            <Button type="submit" isLoading={saving}>Save Changes</Button>
+          <div className="flex justify-between pt-4 border-t border-border">
+            <Button
+              type="button"
+              variant="danger"
+              size="sm"
+              onClick={async () => {
+                if (!confirm("Delete this product permanently? This cannot be undone.")) return;
+                try {
+                  const res = await fetch(`/api/products/${productId}`, { method: "DELETE" });
+                  const data = await res.json();
+                  if (!res.ok || !data.success) throw new Error(data.error || "Delete failed");
+                  toast.success("Product deleted");
+                  router.push("/admin/products");
+                } catch (e: any) {
+                  toast.error(e.message || "Failed to delete");
+                }
+              }}
+            >
+              Delete Product
+            </Button>
+            <div className="flex gap-3">
+              <Button type="button" variant="ghost" onClick={() => router.push("/admin/products")}>Cancel</Button>
+              <Button type="submit" isLoading={saving}>Save Changes</Button>
+            </div>
           </div>
         </form>
       </div>
