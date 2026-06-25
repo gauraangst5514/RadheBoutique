@@ -60,19 +60,23 @@ export const addressSchema = z.object({
 export const productSchema = z.object({
   name: z.string().min(3, "Product name must be at least 3 characters"),
   slug: z.string().optional(),
-  description: z.string().min(20, "Description must be at least 20 characters"),
+  description: z.string().min(5, "Description required"),
   shortDescription: z.string().max(150, "Short description must be under 150 characters"),
   price: z.number().positive("Price must be positive"),
-  salePrice: z.number().positive().optional(),
+  salePrice: z.number().positive().optional().nullable(),
   category: z.string().min(1, "Category is required"),
   metal: z.enum(["gold", "silver", "platinum", "rose-gold"]),
   stone: z.enum(["diamond", "ruby", "emerald", "sapphire", "none", "other"]),
-  weight: z.number().positive("Weight must be positive"),
+  weight: z.number().min(0).optional(),
   sku: z.string().min(1, "SKU is required"),
   stock: z.number().int().min(0, "Stock cannot be negative"),
   featured: z.boolean().optional(),
   isActive: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
+  images: z.array(z.object({
+    url: z.string().url(),
+    publicId: z.string(),
+  })).optional(),
 });
 
 // Category Validation

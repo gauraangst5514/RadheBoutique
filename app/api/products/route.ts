@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const validatedData = productSchema.parse(body);
+    const validatedData = productSchema.passthrough().parse(body);
 
     await connectDB();
 
