@@ -206,12 +206,12 @@ export default async function HomePage() {
               <Link
                 key={cat.name}
                 href={`/shop?category=${cat.slug}`}
-                className="reveal group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border"
+                className="reveal group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border block"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
                 <Image src={cat.img} alt={cat.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <h3 className="absolute bottom-3 left-3 font-display text-base md:text-lg text-white group-hover:text-sand transition-colors">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                <h3 className="absolute bottom-3 left-3 font-display text-base md:text-lg text-white group-hover:text-sand transition-colors pointer-events-none">
                   {cat.name}
                 </h3>
               </Link>

@@ -42,8 +42,8 @@ export default async function CollectionsPage() {
                     className="object-cover"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 pointer-events-none">
                   <h2 className="font-display text-3xl text-white group-hover:text-sand transition-colors mb-2">
                     {category.name}
                   </h2>

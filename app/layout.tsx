@@ -77,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${marcellus.variable} ${cormorant.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${marcellus.variable} ${cormorant.variable} ${montserrat.variable}`} suppressHydrationWarning style={{ colorScheme: "light" }}>
       <body suppressHydrationWarning>
         {children}
         <ScrollReveal />
