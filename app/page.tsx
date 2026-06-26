@@ -55,8 +55,8 @@ export default async function HomePage() {
   const hero = {
     headline: s.heroHeadline || "Jewellery That",
     subheadline: s.heroSubheadline || "Tells a Story",
-    description: s.heroDescription || "Handcrafted heirlooms rooted in tradition. Each piece is a quiet celebration of art, love, and timeless elegance.",
-    cta1Text: s.heroCta1Text || "Shop Collection",
+    description: s.heroDescription || "Jewellery for every occasion — from everyday elegance to celebrations that matter. Anti-tarnish, long-lasting pieces designed to match your style, your moments, and your story.",
+    cta1Text: s.heroCta1Text || "Browse Collection",
     cta1Link: s.heroCta1Link || "/shop",
     cta2Text: s.heroCta2Text || "Our Story",
     cta2Link: s.heroCta2Link || "/about",
