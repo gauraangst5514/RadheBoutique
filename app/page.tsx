@@ -197,7 +197,7 @@ export default async function HomePage() {
 
         {/* ═══════ CATEGORIES ═══════ */}
         <section className="py-12 md:py-20 container">
-          <div className="text-center mb-8 reveal">
+          <div className="text-center mb-8">
             <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Browse</p>
             <h2 className="font-display text-2xl md:text-3xl text-ivory">Shop by Category</h2>
           </div>
@@ -206,8 +206,7 @@ export default async function HomePage() {
               <Link
                 key={cat.name}
                 href={`/shop?category=${cat.slug}`}
-                className="reveal group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border block"
-                style={{ transitionDelay: `${i * 50}ms` }}
+                className="group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border block"
               >
                 <Image src={cat.img} alt={cat.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
