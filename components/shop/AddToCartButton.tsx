@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ShoppingCart, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
@@ -9,6 +10,7 @@ import { IProduct } from "@/types";
 
 export default function AddToCartButton({ product }: { product: IProduct }) {
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
   const addToCart = useCartStore((state) => state.addItem);
 
   const handleAddToCart = () => {
@@ -28,6 +30,7 @@ export default function AddToCartButton({ product }: { product: IProduct }) {
       stock: product.stock,
     });
 
+    setAddedToCart(true);
     toast.success("Added to cart");
   };
 
@@ -53,14 +56,27 @@ export default function AddToCartButton({ product }: { product: IProduct }) {
         </div>
       </div>
 
-      <Button
-        className="w-full"
-        onClick={handleAddToCart}
-        disabled={product.stock <= 0}
-      >
-        <ShoppingCart className="mr-2" size={20} />
-        {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
-      </Button>
+      <div className="flex gap-3">
+        <Button
+          className="flex-1"
+          onClick={handleAddToCart}
+          disabled={product.stock <= 0}
+        >
+          <ShoppingCart className="mr-2" size={20} />
+          {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
+        </Button>
+
+        {addedToCart && (
+          <Link
+            href="/cart"
+            className="flex items-center gap-2 px-5 py-3 bg-gold text-bg font-semibold rounded hover:bg-gold/90 transition-colors animate-in fade-in slide-in-from-right-2 duration-300"
+          >
+            <ShoppingBag size={20} />
+            <span className="hidden sm:inline">View Cart</span>
+            <ArrowRight size={16} />
+          </Link>
+        )}
+      </div>
     </div>
   );
 }

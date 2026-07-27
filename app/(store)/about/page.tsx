@@ -23,7 +23,7 @@ export default function AboutPage() {
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <Image
-              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920"
+              src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815801/radhe-boutique/products/rb-025/rb-025-1.jpg"
               alt=""
               fill
               className="object-cover"
@@ -48,7 +48,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="aspect-[4/5] rounded-lg overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800"
+                    src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782389667/radhe-boutique/products/fq42e11tzpzwqwopbvfs.jpg"
                     alt="Our jewellery"
                     fill
                     className="object-cover"

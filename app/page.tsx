@@ -13,11 +13,11 @@ void Category;
 export const dynamic = "force-dynamic";
 
 const defaultCategories = [
-  { name: "Rings", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=600&fit=crop" },
-  { name: "Necklaces", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop" },
-  { name: "Earrings", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop" },
-  { name: "Bracelets", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&h=600&fit=crop" },
-  { name: "Sets", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=600&fit=crop" },
+  { name: "Rings", img: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782812462/radhe-boutique/products/rb-001/rb-001-1.jpg" },
+  { name: "Necklaces", img: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782389667/radhe-boutique/products/fq42e11tzpzwqwopbvfs.jpg" },
+  { name: "Earrings", img: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782812507/radhe-boutique/products/rb-027/rb-027-1.jpg" },
+  { name: "Bracelets", img: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782405620/radhe-boutique/products/wcralhsxyrmyihdhvzkw.jpg" },
+  { name: "Necklace Sets", img: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815801/radhe-boutique/products/rb-025/rb-025-1.jpg" },
 ];
 
 export default async function HomePage() {
@@ -111,7 +111,7 @@ export default async function HomePage() {
                 {/* Main image */}
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-border">
                   <Image
-                    src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=1100&fit=crop"
+                    src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815794/radhe-boutique/products/rb-028/rb-028-1.jpg"
                     alt="Luxury jewellery collection"
                     width={360}
                     height={480}
@@ -122,8 +122,8 @@ export default async function HomePage() {
                 {/* Floating smaller image */}
                 <div className="absolute -bottom-4 -left-8 md:-left-12 w-28 md:w-36 aspect-square rounded-xl overflow-hidden shadow-xl border-4 border-bg hidden sm:block">
                   <Image
-                    src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&h=300&fit=crop"
-                    alt="Gold ring"
+                    src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813132/radhe-boutique/products/rb-049/rb-049-1.jpg"
+                    alt="Pearl earrings"
                     width={144}
                     height={144}
                     className="object-cover w-full h-full"
@@ -254,10 +254,10 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {[
-              "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813180/radhe-boutique/products/rb-039/rb-039-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815794/radhe-boutique/products/rb-028/rb-028-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813132/radhe-boutique/products/rb-049/rb-049-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815533/radhe-boutique/products/rb-036/rb-036-1.jpg",
             ].map((img, i) => (
               <a
                 key={i}

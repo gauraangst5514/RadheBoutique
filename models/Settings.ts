@@ -49,7 +49,7 @@ const settingsSchema = new Schema<ISiteSettings>(
     featuredSubtitle: { type: String, default: "Featured" },
     featuredDescription: { type: String, default: "Timeless pieces for your most cherished moments. Handcrafted with certified diamonds and 22K hallmarked gold." },
     featuredLink: { type: String, default: "/shop" },
-    featuredImage: { type: String, default: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=900&h=700&fit=crop" },
+    featuredImage: { type: String, default: "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815801/radhe-boutique/products/rb-025/rb-025-1.jpg" },
 
     upiId: { type: String, default: "" },
     paymentQrImage: { type: String, default: "" },
