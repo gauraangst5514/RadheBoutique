@@ -219,22 +219,28 @@ export default async function HomePage() {
         </section>
 
         {/* ═══════ WHY US ═══════ */}
-        <section className="py-10 md:py-16 bg-white border-y border-border">
-          <div className="container grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {[
-              { icon: "✦", title: "Anti-Tarnish", desc: "Long-lasting shine" },
-              { icon: "💎", title: "Premium Quality", desc: "Best in market" },
-              { icon: "🚚", title: "Free Delivery", desc: "Orders above ₹499" },
-              { icon: "↺", title: "Easy Returns", desc: "30-day policy" },
-            ].map((v) => (
-              <div key={v.title} className="text-center reveal">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-gold text-lg md:text-xl">{v.icon}</span>
+        <section className="py-14 md:py-20 bg-surface border-y border-border">
+          <div className="container">
+            <div className="text-center mb-10">
+              <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Why Choose Us</p>
+              <h2 className="font-display text-2xl md:text-3xl text-ivory">Crafted with Care</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              {[
+                { title: "Anti-Tarnish", desc: "Long-lasting shine that stays beautiful over time", icon: (<svg className="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" /></svg>) },
+                { title: "Premium Quality", desc: "Stainless steel & hypoallergenic materials", icon: (<svg className="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>) },
+                { title: "Free Delivery", desc: "Complimentary shipping on orders above ₹499", icon: (<svg className="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5h7.5a1.5 1.5 0 011.5 1.5v3.75m-7.5 9.75h7.5m-7.5 0a1.5 1.5 0 01-1.5-1.5m9 1.5a1.5 1.5 0 001.5-1.5m0 0V9.75m0 7.5a1.5 1.5 0 001.5-1.5V9.75m0 0a1.5 1.5 0 00-1.5-1.5h-1.875M15.75 9.75v4.5m-7.5-4.5v4.5M3.75 9.75h16.5" /></svg>) },
+                { title: "Easy Returns", desc: "Hassle-free 30-day return & exchange policy", icon: (<svg className="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>) },
+              ].map((v) => (
+                <div key={v.title} className="text-center p-4 md:p-6 rounded-xl bg-bg/50 border border-border/50">
+                  <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
+                    {v.icon}
+                  </div>
+                  <h3 className="font-display text-sm md:text-base text-ivory mb-1.5">{v.title}</h3>
+                  <p className="text-xs text-ivory/50 leading-relaxed">{v.desc}</p>
                 </div>
-                <h3 className="font-display text-sm md:text-base text-ivory">{v.title}</h3>
-                <p className="text-[11px] text-ivory/45 mt-0.5">{v.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -254,10 +260,10 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {[
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813180/radhe-boutique/products/rb-039/rb-039-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815794/radhe-boutique/products/rb-028/rb-028-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813132/radhe-boutique/products/rb-049/rb-049-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815533/radhe-boutique/products/rb-036/rb-036-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813078/radhe-boutique/products/rb-042/rb-042-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815516/radhe-boutique/products/rb-038/rb-038-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813153/radhe-boutique/products/rb-041/rb-041-1.jpg",
+              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782814637/radhe-boutique/products/rb-057/rb-057-1.jpg",
             ].map((img, i) => (
               <a
                 key={i}
