@@ -32,6 +32,14 @@ export default async function ProductDetailPage({
   const plainProduct = JSON.parse(JSON.stringify(product));
   const discount = calculateDiscount(plainProduct.price, plainProduct.salePrice);
   const displayPrice = plainProduct.salePrice || plainProduct.price;
+  
+  // Ensure ratings object exists
+  if (!plainProduct.ratings) {
+    plainProduct.ratings = { average: 0, count: 0 };
+  }
+  if (!plainProduct.images) {
+    plainProduct.images = [];
+  }
 
   return (
     <>
