@@ -17,39 +17,40 @@ export default async function CollectionsPage() {
     <>
       <Navbar user={null} />
       <main className="min-h-screen bg-bg text-ivory">
-        <div className="container mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="font-display text-4xl md:text-5xl text-gold mb-4">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="text-center mb-12 md:mb-16">
+            <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-3 font-medium">Explore</p>
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-ivory mb-4">
               Our Collections
             </h1>
-            <p className="text-ivory/60 max-w-2xl mx-auto">
-              Explore our curated collections of handcrafted jewellery, each piece a testament to artistry and elegance.
+            <p className="text-ivory/45 max-w-md mx-auto text-[15px] leading-relaxed">
+              Curated categories of handcrafted jewellery, each piece a testament to artistry and elegance.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {plainCategories.map((category: any) => (
               <Link
                 key={category._id}
                 href={`/shop?category=${category.slug}`}
-                className="group relative aspect-[4/5] rounded-2xl overflow-hidden border border-border card-hover zoom-hover shadow-sm"
+                className="group relative aspect-[4/5] overflow-hidden block"
               >
                 {category.image?.url && (
                   <Image
                     src={category.image.url}
                     alt={category.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 pointer-events-none">
-                  <h2 className="font-display text-3xl text-white group-hover:text-sand transition-colors mb-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <h2 className="font-display text-2xl md:text-3xl text-white group-hover:text-sand transition-colors mb-1.5">
                     {category.name}
                   </h2>
-                  <p className="text-white/70 text-sm">{category.description}</p>
-                  <span className="inline-block mt-3 text-sand text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Explore →
+                  <p className="text-white/60 text-sm leading-relaxed mb-3">{category.description}</p>
+                  <span className="text-sand/80 text-[12px] tracking-[0.1em] uppercase font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Explore Collection →
                   </span>
                 </div>
               </Link>

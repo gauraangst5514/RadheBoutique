@@ -28,10 +28,11 @@ export default function CartPage() {
     return (
       <div className="min-h-screen bg-bg text-ivory flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="heading-1 text-gold mb-4">Your Cart is Empty</h1>
-          <p className="text-ivory/60 mb-8">Add some beautiful jewellery to your cart</p>
+          <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-3 font-medium">Your Cart</p>
+          <h1 className="font-display text-3xl text-ivory mb-3">Nothing here yet</h1>
+          <p className="text-ivory/40 text-sm mb-8">Add some beautiful pieces to get started.</p>
           <Link href="/shop">
-            <Button>Continue Shopping</Button>
+            <Button>Browse Collection</Button>
           </Link>
         </div>
       </div>
@@ -39,9 +40,10 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-ivory py-24 px-4">
+    <div className="min-h-screen bg-bg text-ivory py-16 md:py-20 px-4">
       <div className="container mx-auto max-w-6xl">
-        <h1 className="heading-1 text-gold mb-8">Shopping Cart</h1>
+        <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Shopping</p>
+        <h1 className="font-display text-3xl text-ivory mb-10">Your Cart</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -49,21 +51,21 @@ export default function CartPage() {
             {items.map((item) => (
               <div
                 key={`${item.product}-${item.metal}`}
-                className="bg-surface border border-border rounded-lg p-4 flex gap-4"
+                className="border-b border-border py-6 flex gap-5"
               >
-                <div className="relative w-24 h-24 flex-shrink-0">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 bg-sand/30 overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
-                    className="object-cover rounded"
+                    className="object-cover"
                   />
                 </div>
 
-                <div className="flex-1">
-                  <h3 className="font-display text-lg text-gold mb-1">{item.name}</h3>
-                  <p className="text-sm text-ivory/60 mb-2 capitalize">Metal: {item.metal}</p>
-                  <p className="text-lg font-semibold text-ivory">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[14px] font-medium text-ivory mb-1 truncate">{item.name}</h3>
+                  <p className="text-[12px] text-ivory/40 mb-2 capitalize">Metal: {item.metal}</p>
+                  <p className="text-sm font-semibold text-ivory">
                     {formatPrice(item.salePrice || item.price)}
                   </p>
                 </div>
@@ -71,25 +73,25 @@ export default function CartPage() {
                 <div className="flex flex-col items-end justify-between">
                   <button
                     onClick={() => removeItem(item.product, item.metal)}
-                    className="text-red-500 hover:text-red-400 transition-colors"
+                    className="text-ivory/30 hover:text-red-500 transition-colors"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={16} strokeWidth={1.5} />
                   </button>
 
-                  <div className="flex items-center gap-2 border border-border rounded">
+                  <div className="flex items-center border border-border">
                     <button
                       onClick={() => updateQuantity(item.product, item.metal, item.quantity - 1)}
-                      className="px-2 py-1 hover:bg-gold hover:text-bg transition-colors"
+                      className="px-2.5 py-1.5 text-ivory/50 hover:text-gold transition-colors"
                     >
-                      <Minus size={16} />
+                      <Minus size={14} />
                     </button>
-                    <span className="px-3">{item.quantity}</span>
+                    <span className="px-3 py-1.5 text-sm border-x border-border font-medium">{item.quantity}</span>
                     <button
                       onClick={() => updateQuantity(item.product, item.metal, item.quantity + 1)}
-                      className="px-2 py-1 hover:bg-gold hover:text-bg transition-colors"
+                      className="px-2.5 py-1.5 text-ivory/50 hover:text-gold transition-colors"
                       disabled={item.quantity >= item.stock}
                     >
-                      <Plus size={16} />
+                      <Plus size={14} />
                     </button>
                   </div>
                 </div>
@@ -99,22 +101,22 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-surface border border-border rounded-lg p-6 sticky top-24">
-              <h2 className="font-display text-2xl text-gold mb-6">Order Summary</h2>
+            <div className="bg-surface border border-border p-6 md:p-8 sticky top-24">
+              <h2 className="text-[11px] tracking-[0.15em] uppercase font-semibold text-ivory/60 mb-6">Order Summary</h2>
 
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-ivory/80">
+              <div className="space-y-3 mb-6 text-sm">
+                <div className="flex justify-between text-ivory/60">
                   <span>Subtotal</span>
-                  <span>{formatPrice(total)}</span>
+                  <span className="text-ivory">{formatPrice(total)}</span>
                 </div>
-                <div className="flex justify-between text-ivory/80">
+                <div className="flex justify-between text-ivory/60">
                   <span>Shipping</span>
-                  <span>{total >= 499 ? "FREE" : formatPrice(99)}</span>
+                  <span className="text-ivory">{total >= 499 ? "Free" : formatPrice(99)}</span>
                 </div>
-                <div className="border-t border-border pt-3">
-                  <div className="flex justify-between text-xl font-bold">
+                <div className="border-t border-border pt-4 mt-4">
+                  <div className="flex justify-between text-lg font-semibold">
                     <span>Total</span>
-                    <span className="text-gold">
+                    <span className="text-ivory">
                       {formatPrice(total + (total >= 499 ? 0 : 99))}
                     </span>
                   </div>
@@ -135,8 +137,8 @@ export default function CartPage() {
               </Link>
 
               {total < 499 && (
-                <p className="text-xs text-ivory/60 text-center mt-4">
-                  Add {formatPrice(499 - total)} more for FREE shipping
+                <p className="text-[11px] text-ivory/40 text-center mt-5">
+                  Add {formatPrice(499 - total)} more for free shipping
                 </p>
               )}
             </div>
