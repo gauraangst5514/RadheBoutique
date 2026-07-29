@@ -242,9 +242,9 @@ export default async function HomePage() {
           <div className="container">
             <div className="text-center mb-10">
               <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Follow Us</p>
-              <h2 className="font-display text-2xl md:text-3xl text-ivory mb-3">@radheboutique</h2>
+              <h2 className="font-display text-2xl md:text-3xl text-ivory mb-3">@radheboutique5514</h2>
               <a
-                href="https://instagram.com/radheboutique"
+                href="https://instagram.com/radheboutique5514"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ivory/40 text-[13px] font-medium hover:text-gold transition-colors"
@@ -261,7 +261,7 @@ export default async function HomePage() {
               ].map((img, i) => (
                 <a
                   key={i}
-                  href="https://instagram.com/radheboutique"
+                  href="https://instagram.com/radheboutique5514"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative aspect-square overflow-hidden"
