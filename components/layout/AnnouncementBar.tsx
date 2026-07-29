@@ -34,22 +34,22 @@ export default function AnnouncementBar() {
   if (!data || dismissed) return null;
 
   return (
-    <div className="bg-gold text-white text-center text-sm py-2.5 px-10 relative overflow-hidden">
+    <div className="bg-ivory text-white text-center text-[11px] tracking-[0.06em] py-2 px-10 relative">
       <div className="container mx-auto">
         {data.link ? (
           <Link href={data.link} className="hover:underline underline-offset-2 font-medium inline-block animate-[slide-down_0.4s_ease-out]">
             {data.text}
           </Link>
         ) : (
-          <span className="inline-block animate-[slide-down_0.4s_ease-out]">{data.text}</span>
+          <span className="inline-block animate-[slide-down_0.4s_ease-out] font-medium">{data.text}</span>
         )}
       </div>
       <button
         onClick={handleDismiss}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
         aria-label="Dismiss"
       >
-        <X size={16} />
+        <X size={14} />
       </button>
     </div>
   );

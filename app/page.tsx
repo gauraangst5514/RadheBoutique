@@ -71,61 +71,51 @@ export default async function HomePage() {
 
         {/* ═══════ HERO ═══════ */}
         <section className="relative overflow-hidden">
-          {/* Background pattern */}
-          <div className="absolute inset-0 warli-pattern opacity-40" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/[0.04] rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute inset-0 warli-pattern opacity-30" />
 
-          <div className="container relative z-10 grid lg:grid-cols-2 items-center gap-8 lg:gap-0 py-12 md:py-20 lg:py-24">
+          <div className="container relative z-10 grid lg:grid-cols-2 items-center gap-12 lg:gap-0 py-16 md:py-24 lg:py-32">
             {/* Left text */}
-            <div className="max-w-lg">
-              <p className="text-gold text-[10px] md:text-xs tracking-[0.4em] uppercase mb-4 font-semibold animate-fade-up">
+            <div className="max-w-xl">
+              <p className="text-gold/80 text-[11px] tracking-[0.35em] uppercase mb-5 font-medium animate-fade-up">
                 New Collection 2026
               </p>
-              <h1 className="font-display text-[2.5rem] md:text-5xl lg:text-6xl text-ivory leading-[1.08] mb-5 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+              <h1 className="font-display text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] text-ivory leading-[1.05] mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
                 {hero.headline}<br />
                 <span className="gradient-gold">{hero.subheadline}</span>
               </h1>
-              <p className="text-ivory/55 text-sm md:text-base mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: "0.2s" }}>
+              <p className="text-ivory/50 text-[15px] md:text-base mb-10 leading-[1.7] max-w-md animate-fade-up" style={{ animationDelay: "0.2s" }}>
                 {hero.description}
               </p>
-              <div className="flex gap-3 flex-col sm:flex-row animate-fade-up" style={{ animationDelay: "0.3s" }}>
-                <Link href={hero.cta1Link} className="btn-sheen bg-gold text-white px-8 py-3 rounded-full font-semibold text-sm transition-all hover:shadow-lg hover:shadow-gold/25 text-center">
+              <div className="flex gap-4 flex-col sm:flex-row animate-fade-up" style={{ animationDelay: "0.3s" }}>
+                <Link href={hero.cta1Link} className="btn-sheen bg-ivory text-white px-8 py-3.5 font-medium text-[13px] tracking-[0.04em] uppercase transition-all hover:shadow-lg hover:shadow-black/10 text-center">
                   {hero.cta1Text}
                 </Link>
-                <Link href={hero.cta2Link} className="border border-border text-ivory hover:border-gold hover:text-gold px-8 py-3 rounded-full font-semibold text-sm transition-all text-center">
+                <Link href={hero.cta2Link} className="border border-ivory/20 text-ivory/70 hover:border-gold hover:text-gold px-8 py-3.5 font-medium text-[13px] tracking-[0.04em] uppercase transition-all text-center">
                   {hero.cta2Text}
                 </Link>
               </div>
-
-              {/* Trust badges inline */}
-              <div className="flex items-center gap-6 mt-10 text-ivory/40 text-xs animate-fade-up" style={{ animationDelay: "0.4s" }}>
-                <span className="flex items-center gap-1.5">✦ Anti-Tarnish</span>
-                <span className="flex items-center gap-1.5">◈ Long Lasting</span>
-                <span className="flex items-center gap-1.5">❉ Free Shipping</span>
-              </div>
             </div>
 
-            {/* Right: Image collage */}
+            {/* Right: Image */}
             <div className="relative flex justify-center lg:justify-end animate-scale-in" style={{ animationDelay: "0.15s" }}>
-              <div className="relative w-64 md:w-80 lg:w-[360px]">
-                {/* Main image */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-black/10 border border-border">
+              <div className="relative w-72 md:w-80 lg:w-[380px]">
+                <div className="aspect-[3/4] overflow-hidden shadow-2xl shadow-black/8">
                   <Image
                     src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815794/radhe-boutique/products/rb-028/rb-028-1.jpg"
                     alt="Luxury jewellery collection"
-                    width={360}
-                    height={480}
+                    width={380}
+                    height={507}
                     priority
                     className="object-cover w-full h-full"
                   />
                 </div>
-                {/* Floating smaller image */}
-                <div className="absolute -bottom-4 -left-8 md:-left-12 w-28 md:w-36 aspect-square rounded-xl overflow-hidden shadow-xl border-4 border-bg hidden sm:block">
+                {/* Floating accent image */}
+                <div className="absolute -bottom-6 -left-10 md:-left-14 w-32 md:w-40 aspect-square overflow-hidden shadow-xl border-[5px] border-bg hidden sm:block">
                   <Image
                     src="https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813132/radhe-boutique/products/rb-049/rb-049-1.jpg"
                     alt="Pearl earrings"
-                    width={144}
-                    height={144}
+                    width={160}
+                    height={160}
                     className="object-cover w-full h-full"
                   />
                 </div>
@@ -136,59 +126,55 @@ export default async function HomePage() {
 
         {/* ═══════ TRENDING PRODUCTS ═══════ */}
         {featuredProducts.length > 0 && (
-          <section className="py-12 md:py-20 bg-white border-y border-border">
+          <section className="py-16 md:py-24">
             <div className="container">
-              <div className="flex items-end justify-between mb-8">
+              <div className="flex items-end justify-between mb-10">
                 <div>
-                  <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Trending</p>
+                  <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Trending</p>
                   <h2 className="font-display text-2xl md:text-3xl text-ivory">Bestsellers</h2>
                 </div>
-                <Link href="/shop" className="text-gold text-sm font-semibold hover:underline underline-offset-4 hidden sm:block">
+                <Link href="/shop" className="text-ivory/50 text-[13px] font-medium hover:text-gold transition-colors hidden sm:block tracking-wide">
                   View All →
                 </Link>
               </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {featuredProducts.map((product: any) => (
                   <Link
                     key={product._id}
                     href={`/shop/${product.slug}`}
-                    className="group bg-bg rounded-xl overflow-hidden border border-border card-hover"
+                    className="group block"
                   >
-                    <div className="relative aspect-square overflow-hidden zoom-hover">
+                    <div className="relative aspect-square overflow-hidden bg-surface mb-3">
                       {product.images?.[0] && (
                         <Image
                           src={product.images[0].url}
                           alt={product.name}
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                           sizes="(max-width: 768px) 50vw, 25vw"
                         />
                       )}
                       {product.salePrice && product.salePrice < product.price && (
-                        <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                          SALE
+                        <span className="absolute top-3 left-3 bg-ivory text-white text-[10px] font-bold px-2.5 py-1 tracking-wide uppercase">
+                          Sale
                         </span>
                       )}
                     </div>
-                    <div className="p-3 md:p-4">
-                      <h3 className="text-sm font-medium text-ivory truncate group-hover:text-gold transition-colors">
-                        {product.name}
-                      </h3>
-                      <div className="flex items-baseline gap-2 mt-1.5">
-                        <span className="text-gold font-semibold text-sm">
-                          {formatPrice(product.salePrice || product.price)}
+                    <h3 className="text-[13px] font-medium text-ivory/80 truncate group-hover:text-gold transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-gold font-semibold text-sm mt-1">
+                      {formatPrice(product.salePrice || product.price)}
+                      {product.salePrice && product.salePrice < product.price && (
+                        <span className="text-ivory/35 text-xs line-through ml-2 font-normal">
+                          {formatPrice(product.price)}
                         </span>
-                        {product.salePrice && product.salePrice < product.price && (
-                          <span className="text-ivory/40 text-xs line-through">
-                            {formatPrice(product.price)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
+                      )}
+                    </p>
                   </Link>
                 ))}
               </div>
-              <Link href="/shop" className="mt-6 block text-center text-gold text-sm font-semibold hover:underline sm:hidden">
+              <Link href="/shop" className="mt-8 block text-center text-ivory/50 text-[13px] font-medium hover:text-gold transition-colors sm:hidden tracking-wide">
                 View All Products →
               </Link>
             </div>
@@ -196,25 +182,32 @@ export default async function HomePage() {
         )}
 
         {/* ═══════ CATEGORIES ═══════ */}
-        <section className="py-12 md:py-20 container">
-          <div className="text-center mb-8">
-            <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Browse</p>
-            <h2 className="font-display text-2xl md:text-3xl text-ivory">Shop by Category</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-            {categories.map((cat, i) => (
-              <Link
-                key={cat.name}
-                href={`/shop?category=${cat.slug}`}
-                className="group relative aspect-[3/4] rounded-xl overflow-hidden card-hover zoom-hover border border-border block"
-              >
-                <Image src={cat.img} alt={cat.name} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-                <h3 className="absolute bottom-3 left-3 font-display text-base md:text-lg text-white group-hover:text-sand transition-colors pointer-events-none">
-                  {cat.name}
-                </h3>
-              </Link>
-            ))}
+        <section className="py-16 md:py-24 border-y border-border">
+          <div className="container">
+            <div className="text-center mb-10 md:mb-14">
+              <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Browse</p>
+              <h2 className="font-display text-2xl md:text-3xl text-ivory">Shop by Category</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
+              {categories.map((cat, i) => (
+                <Link
+                  key={cat.name}
+                  href={`/shop?category=${cat.slug}`}
+                  className="group relative aspect-[3/4] overflow-hidden block"
+                >
+                  <Image src={cat.img} alt={cat.name} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" sizes="(max-width: 768px) 50vw, 20vw" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+                    <h3 className="font-display text-base md:text-lg text-white group-hover:text-sand transition-colors">
+                      {cat.name}
+                    </h3>
+                    <span className="text-white/50 text-[11px] tracking-wide uppercase mt-1 block opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Explore →
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -244,63 +237,65 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ═══════ INSTAGRAM / SOCIAL PROOF ═══════ */}
-        <section className="py-12 md:py-20 container">
-          <div className="text-center mb-8 reveal">
-            <p className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1 font-semibold">Follow Us</p>
-            <h2 className="font-display text-2xl md:text-3xl text-ivory mb-2">@radheboutique</h2>
-            <a
-              href="https://instagram.com/radheboutique"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold text-sm font-medium hover:underline"
-            >
-              View on Instagram →
-            </a>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-            {[
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813078/radhe-boutique/products/rb-042/rb-042-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815516/radhe-boutique/products/rb-038/rb-038-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813153/radhe-boutique/products/rb-041/rb-041-1.jpg",
-              "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782814637/radhe-boutique/products/rb-057/rb-057-1.jpg",
-            ].map((img, i) => (
+        {/* ═══════ INSTAGRAM ═══════ */}
+        <section className="py-16 md:py-24">
+          <div className="container">
+            <div className="text-center mb-10">
+              <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Follow Us</p>
+              <h2 className="font-display text-2xl md:text-3xl text-ivory mb-3">@radheboutique</h2>
               <a
-                key={i}
                 href="https://instagram.com/radheboutique"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative aspect-square rounded-xl overflow-hidden zoom-hover"
+                className="text-ivory/40 text-[13px] font-medium hover:text-gold transition-colors"
               >
-                <Image src={img} alt="" fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                  <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-semibold">
-                    View Post
-                  </span>
-                </div>
+                View on Instagram →
               </a>
-            ))}
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+              {[
+                "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813078/radhe-boutique/products/rb-042/rb-042-1.jpg",
+                "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782815516/radhe-boutique/products/rb-038/rb-038-1.jpg",
+                "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782813153/radhe-boutique/products/rb-041/rb-041-1.jpg",
+                "https://res.cloudinary.com/djxs8lcjg/image/upload/v1782814637/radhe-boutique/products/rb-057/rb-057-1.jpg",
+              ].map((img, i) => (
+                <a
+                  key={i}
+                  href="https://instagram.com/radheboutique"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative aspect-square overflow-hidden"
+                >
+                  <Image src={img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium tracking-wide uppercase">
+                      View
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ═══════ CTA ═══════ */}
-        <section className="py-12 md:py-16 bg-gold/5 border-y border-gold/10">
-          <div className="container text-center max-w-lg mx-auto reveal">
-            <h3 className="font-display text-xl md:text-2xl text-ivory mb-2">Begin Your Journey</h3>
-            <p className="text-ivory/50 text-sm mb-6">
+        <section className="py-16 md:py-20 border-t border-border">
+          <div className="container text-center max-w-lg mx-auto">
+            <h3 className="font-display text-xl md:text-2xl text-ivory mb-3">Begin Your Journey</h3>
+            <p className="text-ivory/45 text-sm mb-8 leading-relaxed">
               Browse our collection or message us on WhatsApp for a personalised experience.
             </p>
-            <div className="flex gap-3 justify-center flex-col sm:flex-row">
-              <Link href="/shop" className="btn-sheen bg-gold text-white px-7 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-gold/20 transition-all text-sm">
+            <div className="flex gap-4 justify-center flex-col sm:flex-row">
+              <Link href="/shop" className="btn-sheen bg-ivory text-white px-8 py-3.5 font-medium text-[13px] tracking-[0.04em] uppercase transition-all hover:shadow-lg text-center">
                 Explore Shop
               </Link>
               <a
                 href="https://wa.me/919022013489?text=Hi!%20I%27m%20interested%20in%20your%20jewellery%20collection"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-green-500 text-green-700 hover:bg-green-500 hover:text-white px-7 py-2.5 rounded-full font-semibold transition-all text-sm"
+                className="border border-green-600/30 text-green-700 hover:bg-green-600 hover:text-white px-8 py-3.5 font-medium text-[13px] tracking-[0.04em] uppercase transition-all text-center"
               >
-                💬 Chat on WhatsApp
+                Chat on WhatsApp
               </a>
             </div>
           </div>
