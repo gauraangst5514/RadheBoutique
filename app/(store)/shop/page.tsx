@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import connectDB from "@/lib/db";
 import Product from "@/models/Product";
 import Category from "@/models/Category";
@@ -68,18 +69,19 @@ export default async function ShopPage({
     <>
       <Navbar user={session?.user} />
       <main className="min-h-screen bg-bg text-ivory">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12 md:py-16">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="heading-1 text-gold mb-2">Shop All Jewellery</h1>
-            <p className="text-ivory/60">
-              {plainProducts.length} {plainProducts.length === 1 ? "product" : "products"} found
+          <div className="mb-10 md:mb-14">
+            <p className="text-gold/70 text-[11px] tracking-[0.3em] uppercase mb-2 font-medium">Collection</p>
+            <h1 className="font-display text-3xl md:text-4xl text-ivory mb-2">Shop All Jewellery</h1>
+            <p className="text-ivory/45 text-sm">
+              {plainProducts.length} {plainProducts.length === 1 ? "piece" : "pieces"}
             </p>
           </div>
 
           {/* Filters */}
-          <div className="mb-8 flex flex-wrap gap-4">
-            <select className="bg-surface border border-border rounded px-4 py-2 text-ivory">
+          <div className="mb-10 flex flex-wrap gap-3 pb-8 border-b border-border">
+            <select className="bg-transparent border border-border px-4 py-2.5 text-ivory/70 text-[13px] tracking-wide focus:border-gold focus:outline-none transition-colors cursor-pointer appearance-none pr-8 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23a67c52%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[right_12px_center] bg-no-repeat">
               <option value="">All Categories</option>
               {plainCategories.map((cat: any) => (
                 <option key={cat._id} value={cat.slug}>
@@ -88,7 +90,7 @@ export default async function ShopPage({
               ))}
             </select>
 
-            <select className="bg-surface border border-border rounded px-4 py-2 text-ivory">
+            <select className="bg-transparent border border-border px-4 py-2.5 text-ivory/70 text-[13px] tracking-wide focus:border-gold focus:outline-none transition-colors cursor-pointer appearance-none pr-8 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23a67c52%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[right_12px_center] bg-no-repeat">
               <option value="">Sort By</option>
               <option value="-createdAt">Newest First</option>
               <option value="price">Price: Low to High</option>
@@ -99,14 +101,17 @@ export default async function ShopPage({
 
           {/* Products Grid */}
           {plainProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-12">
               {plainProducts.map((product: any) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <p className="text-ivory/60">No products found</p>
+            <div className="text-center py-24">
+              <p className="text-ivory/40 text-sm">No products found matching your criteria.</p>
+              <Link href="/shop" className="text-gold text-sm mt-3 inline-block hover:underline">
+                Clear filters →
+              </Link>
             </div>
           )}
         </div>

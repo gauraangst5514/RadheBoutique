@@ -36,19 +36,19 @@ export default function AddToCartButton({ product }: { product: IProduct }) {
 
   return (
     <div className="flex-1">
-      <div className="flex items-center gap-4 mb-4">
-        <label className="text-sm font-medium">Quantity:</label>
-        <div className="flex items-center border border-border rounded">
+      <div className="flex items-center gap-4 mb-5">
+        <label className="text-[11px] tracking-[0.1em] uppercase text-ivory/50 font-medium">Qty</label>
+        <div className="flex items-center border border-border">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="px-4 py-2 hover:bg-gold hover:text-bg transition-colors"
+            className="px-3 py-2 text-ivory/50 hover:text-gold transition-colors text-sm"
           >
             −
           </button>
-          <span className="px-6 py-2 border-x border-border">{quantity}</span>
+          <span className="px-4 py-2 border-x border-border text-sm font-medium">{quantity}</span>
           <button
             onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-            className="px-4 py-2 hover:bg-gold hover:text-bg transition-colors"
+            className="px-3 py-2 text-ivory/50 hover:text-gold transition-colors text-sm"
             disabled={quantity >= product.stock}
           >
             +
@@ -62,18 +62,17 @@ export default function AddToCartButton({ product }: { product: IProduct }) {
           onClick={handleAddToCart}
           disabled={product.stock <= 0}
         >
-          <ShoppingCart className="mr-2" size={20} />
+          <ShoppingCart className="mr-2" size={16} strokeWidth={1.5} />
           {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
         </Button>
 
         {addedToCart && (
           <Link
             href="/cart"
-            className="flex items-center gap-2 px-5 py-3 bg-gold text-bg font-semibold rounded hover:bg-gold/90 transition-colors animate-in fade-in slide-in-from-right-2 duration-300"
+            className="flex items-center gap-2 px-5 py-3 bg-ivory text-white text-[13px] font-medium tracking-wide transition-colors hover:bg-ivory/90"
           >
-            <ShoppingBag size={20} />
-            <span className="hidden sm:inline">View Cart</span>
-            <ArrowRight size={16} />
+            <ShoppingBag size={16} strokeWidth={1.5} />
+            <ArrowRight size={14} strokeWidth={1.5} />
           </Link>
         )}
       </div>

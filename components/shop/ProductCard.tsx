@@ -63,90 +63,76 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/shop/${product.slug}`} className="group block">
-      <div className="relative bg-surface border border-border rounded-lg overflow-hidden transition-all duration-300 hover:border-gold card-hover">
-        {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-surface">
-          {!isImageLoaded && (
-            <div className="absolute inset-0 bg-surface animate-pulse" />
-          )}
-          {product.images[0] && (
-            <Image
-              src={product.images[0].url}
-              alt={product.name}
-              fill
-              className={`object-cover transition-all duration-500 ${
-                isImageLoaded ? "opacity-100 group-hover:scale-110" : "opacity-0"
-              }`}
-              onLoad={() => setIsImageLoaded(true)}
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            />
-          )}
-
-          {/* Badges */}
-          <div className="absolute top-3 left-3 flex flex-col gap-2">
-            {product.featured && (
-              <span className="bg-gold text-bg text-xs font-bold px-2 py-1 rounded">
-                Featured
-              </span>
-            )}
-            {discount > 0 && (
-              <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
-                {discount}% OFF
-              </span>
-            )}
-            {product.stock <= 0 && (
-              <span className="bg-surface/90 text-ivory text-xs font-bold px-2 py-1 rounded">
-                Out of Stock
-              </span>
-            )}
-          </div>
-
-          {/* Wishlist Button */}
-          <button
-            onClick={handleWishlistToggle}
-            className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-sm transition-all ${
-              inWishlist
-                ? "bg-gold text-bg"
-                : "bg-surface/80 text-ivory hover:bg-gold hover:text-bg"
+      {/* Image */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-sand/30 mb-3">
+        {!isImageLoaded && (
+          <div className="absolute inset-0 bg-sand/40 animate-pulse" />
+        )}
+        {product.images[0] && (
+          <Image
+            src={product.images[0].url}
+            alt={product.name}
+            fill
+            className={`object-cover transition-transform duration-700 ease-out ${
+              isImageLoaded ? "opacity-100 group-hover:scale-105" : "opacity-0"
             }`}
-          >
-            <Heart size={18} fill={inWishlist ? "currentColor" : "none"} />
-          </button>
+            onLoad={() => setIsImageLoaded(true)}
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          />
+        )}
 
-          {/* Quick Add to Cart */}
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          {discount > 0 && (
+            <span className="bg-ivory text-white text-[10px] font-bold px-2.5 py-1 tracking-wider uppercase">
+              {discount}% Off
+            </span>
+          )}
+          {product.stock <= 0 && (
+            <span className="bg-white/90 text-ivory text-[10px] font-bold px-2.5 py-1 tracking-wider uppercase">
+              Sold Out
+            </span>
+          )}
+        </div>
+
+        {/* Wishlist Button */}
+        <button
+          onClick={handleWishlistToggle}
+          className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center transition-all ${
+            inWishlist
+              ? "text-gold"
+              : "text-ivory/40 hover:text-gold opacity-0 group-hover:opacity-100"
+          }`}
+        >
+          <Heart size={18} fill={inWishlist ? "currentColor" : "none"} strokeWidth={1.5} />
+        </button>
+
+        {/* Quick Add */}
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <button
             onClick={handleAddToCart}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 translate-y-10 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gold text-bg px-4 py-2 rounded-sm font-semibold flex items-center gap-2 text-sm"
+            className="w-full bg-ivory/95 text-white py-3 text-[11px] tracking-[0.1em] uppercase font-medium flex items-center justify-center gap-2 hover:bg-ivory transition-colors"
           >
-            <ShoppingCart size={16} />
+            <ShoppingCart size={14} strokeWidth={1.5} />
             Add to Cart
           </button>
         </div>
+      </div>
 
-        {/* Content */}
-        <div className="p-4">
-          <h3 className="font-display text-lg text-ivory mb-2 truncate group-hover:text-gold transition-colors">
-            {product.name}
-          </h3>
-          <p className="text-sm text-ivory/60 mb-3 truncate-2">
-            {product.shortDescription}
-          </p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="text-xl font-bold text-gold">
-                {formatPrice(displayPrice)}
-              </span>
-              {product.salePrice && product.salePrice < product.price && (
-                <span className="text-sm text-ivory/40 line-through">
-                  {formatPrice(product.price)}
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-1 text-xs text-ivory/50">
-              <svg className="w-3.5 h-3.5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-              <span>{product.ratings.average.toFixed(1)}</span>
-            </div>
-          </div>
+      {/* Content */}
+      <div>
+        <h3 className="text-[13px] text-ivory/75 mb-1 truncate group-hover:text-gold transition-colors leading-tight">
+          {product.name}
+        </h3>
+        <div className="flex items-baseline gap-2">
+          <span className="text-sm font-semibold text-ivory">
+            {formatPrice(displayPrice)}
+          </span>
+          {product.salePrice && product.salePrice < product.price && (
+            <span className="text-xs text-ivory/35 line-through">
+              {formatPrice(product.price)}
+            </span>
+          )}
         </div>
       </div>
     </Link>
