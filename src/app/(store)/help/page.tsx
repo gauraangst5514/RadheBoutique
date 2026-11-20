@@ -2,7 +2,7 @@ import { store } from "@/config/store";
 import { waLink } from "@/lib/whatsapp";
 import { PageBanner } from "@/components/motion/PageBanner";
 
-export const metadata = { title: "Help" };
+export const metadata = { title: "Help: shipping, returns & care", alternates: { canonical: "/help" } };
 
 export default function Help() {
   return (

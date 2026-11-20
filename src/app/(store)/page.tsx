@@ -5,6 +5,7 @@ import { Hero, type HeroSlide } from "@/components/hero/Hero";
 import { KoreanHero, type WallItem } from "@/components/hero/KoreanHero";
 import { BoutiqueLady } from "@/components/motion/BoutiqueLady";
 import { Ticker } from "@/components/motion/Ticker";
+import { JsonLd } from "@/components/JsonLd";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductImg, pickImage } from "@/components/ProductImg";
 import type { Product } from "@/lib/types";
@@ -104,8 +105,30 @@ export default async function Home() {
     .filter((w) => w.image)
     .slice(0, 24);
 
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "JewelryStore",
+      name: store.name,
+      url: store.siteUrl,
+      image: `${store.siteUrl}/opengraph-image`,
+      telephone: `+${store.whatsapp}`,
+      priceRange: "₹29 – ₹999",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Shop 4028, 4th floor, Roongtha SSRF Mall, next to City Center Mall",
+        addressLocality: "Nashik",
+        addressRegion: "Maharashtra",
+        addressCountry: "IN",
+      },
+      sameAs: [store.instagram],
+    },
+    { "@context": "https://schema.org", "@type": "WebSite", name: store.name, url: store.siteUrl },
+  ];
+
   return (
     <>
+      <JsonLd data={ld} />
       {wall.length >= 6 ? (
         <KoreanHero
           items={wall}

@@ -4,6 +4,8 @@
  */
 export const store = {
   name: "Radhe Boutique",
+  // The live web address. Used for Google (sitemap, canonical links) and share previews.
+  siteUrl: "https://radheboutique.in",
   city: "Nashik",
   whatsapp: "919272572944", // used for wa.me links (country code, no +)
   phoneDisplay: "92725 72944",

@@ -1,4 +1,5 @@
 import "server-only";
+import { store } from "@/config/store";
 
 /**
  * The site's public address, e.g. "https://radhe-boutique.vercel.app" (no trailing slash).
@@ -6,7 +7,7 @@ import "server-only";
  * Order: NEXT_PUBLIC_SITE_URL, then the address the request came in on, then Vercel's own URLs.
  */
 export function siteUrl(from?: { headers: Headers } | Headers): string {
-  const env = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, "");
+  const env = (process.env.NEXT_PUBLIC_SITE_URL || store.siteUrl)?.trim().replace(/\/+$/, "");
   if (env) return env.includes("://") ? env : `https://${env}`;
   const h = from instanceof Headers ? from : from?.headers;
   const host = h?.get("x-forwarded-host") || h?.get("host");

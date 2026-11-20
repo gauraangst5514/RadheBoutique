@@ -7,6 +7,9 @@ import { ProductImg } from "@/components/ProductImg";
 
 export function EditProduct({ product: p }: { product: Product }) {
   const router = useRouter();
+  const [name, setName] = useState(p.name);
+  const [description, setDescription] = useState(p.description);
+  const [copied, setCopied] = useState(false);
   const [price, setPrice] = useState(String(p.price));
   const [mrp, setMrp] = useState(p.mrp ? String(p.mrp) : "");
   const [active, setActive] = useState(p.active);
@@ -22,6 +25,8 @@ export function EditProduct({ product: p }: { product: Product }) {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
+        name: name.trim(),
+        description: description.trim(),
         price: Number(price),
         mrp: mrp ? Number(mrp) : null,
         active,
@@ -30,7 +35,7 @@ export function EditProduct({ product: p }: { product: Product }) {
       }),
     });
     setBusy(false);
-    setMsg(r.ok ? "Saved" : "Couldn't save. Check the price.");
+    setMsg(r.ok ? "Saved" : "Couldn't save. Check the name (2+ letters) and price.");
     if (r.ok) router.refresh();
   }
 
@@ -43,9 +48,26 @@ export function EditProduct({ product: p }: { product: Product }) {
         <span className="size-20 shrink-0 overflow-hidden rounded-2xl bg-[#F3E7DF]"><ProductImg p={p} className="size-full object-cover" /></span>
         <div className="flex flex-col">
           <h1 className="m-0 text-xl font-bold">{p.name}</h1>
-          <Link href={`/p/${p.slug}`} className="text-sm">View on site</Link>
+          <span className="flex flex-wrap gap-3 text-sm">
+            <Link href={`/p/${p.slug}`} target="_blank">View on site ↗</Link>
+            <button
+              onClick={() => {
+                navigator.clipboard?.writeText(`${window.location.origin}/p/${p.slug}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1800); });
+              }}
+              className="cursor-pointer border-0 bg-transparent p-0 font-bold text-pink underline"
+            >
+              {copied ? "Link copied ✓" : "Copy link"}
+            </button>
+          </span>
         </div>
       </div>
+
+      <label className="flex flex-col gap-1.5"><span className="text-sm font-bold">Name</span><input value={name} maxLength={80} onChange={(e) => setName(e.target.value)} className={input} /></label>
+      <label className="flex flex-col gap-1.5">
+        <span className="text-sm font-bold">Description</span>
+        <textarea value={description} maxLength={800} rows={4} onChange={(e) => setDescription(e.target.value)} className="w-full rounded-xl border border-[#D9B8C4] bg-white p-3.5 text-[15px] leading-relaxed" />
+        <span className="text-xs text-muted">{description.length}/800 · shown on the product page and on Google</span>
+      </label>
 
       <div className="grid grid-cols-2 gap-3">
         <label className="flex flex-col gap-1.5"><span className="text-sm font-bold">Offer price (₹)</span><input inputMode="numeric" value={price} onChange={(e) => setPrice(e.target.value.replace(/\D/g, ""))} className={input} /></label>
