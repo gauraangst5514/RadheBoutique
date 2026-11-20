@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Order, Product, RestockRequest, Variant } from "@/lib/types";
 import { orderNumber, type Repo } from "./repo";
+import { supabaseKey, supabaseUrl } from "./env";
 
 /**
  * Supabase-backed store. Uses the service-role key, so it must only run on the server.
@@ -11,7 +12,7 @@ import { orderNumber, type Repo } from "./repo";
 let client: SupabaseClient | null = null;
 function sb() {
   if (!client) {
-    client = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    client = createClient(supabaseUrl()!, supabaseKey()!, {
       auth: { persistSession: false },
     });
   }
