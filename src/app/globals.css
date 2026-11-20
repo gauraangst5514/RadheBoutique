@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@import "@fontsource/anton/400.css";
+@import "@fontsource-variable/dm-sans/index.css";
+@import "@fontsource-variable/fraunces/wght-italic.css";
+
+@theme {
+  --color-cream: #fff7f2;
+  --color-paper: #fffdf9;
+  --color-ink: #2a0a18;
+  --color-muted: #6e4a58;
+  --color-line: #ebd5dd;
+  --color-pink: #c81e63;
+  --color-blush: #f6c9d6;
+  --color-maroon: #6b1026;
+  --color-emerald: #0e5a45;
+  --color-saffron: #f28c28;
+  --color-gold: #e9b949;
+  --color-ok: #0b6b45;
+  --color-warn: #9a4a00;
+  --color-bad: #8a1c2b;
+
+  --font-sans: "DM Sans Variable", system-ui, sans-serif;
+  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --font-serif: "Fraunces Variable", Georgia, serif;
+}
+
+html {
+  background: var(--color-cream);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.arch {
+  border-radius: 999px 999px 20px 20px;
+}
+
+.placeholder-stripes {
+  background: repeating-linear-gradient(135deg, #fbe3cf 0 14px, #f7d4b8 14px 28px);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes word-in {
+  from { opacity: 0; letter-spacing: 0.12em; }
+  to { opacity: 1; letter-spacing: -0.01em; }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+}
+@keyframes hero-in {
+  from { opacity: 0; filter: blur(14px); transform: translateX(50px); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+.anim-word { animation: word-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-floaty { animation: floaty 4s ease-in-out infinite; }
+.anim-hero-in { animation: hero-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-word, .anim-floaty, .anim-hero-in { animation: none; }
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-pink);
+  outline-offset: 2px;
+}
+
+/* ---------- Korean Earrings hero (src/components/hero/KoreanHero.tsx) ---------- */
+.kh-outline { color: transparent; -webkit-text-stroke: 2px var(--color-maroon); }
+@media (min-width: 768px) { .kh-outline { -webkit-text-stroke-width: 3px; } }
+.kh-stage { perspective: 1400px; }
+.kh-wall {
+  --tx: 0; --ty: 0;
+  transform: rotateX(calc(14deg - var(--ty) * 4deg)) rotateY(calc(-16deg + var(--tx) * 6deg)) rotateZ(6deg);
+  transform-style: preserve-3d;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+.kh-track { animation: kh-up 46s linear infinite; will-change: transform; }
+.kh-col:hover .kh-track, .kh-track:focus-within { animation-play-state: paused; }
+.kh-up { animation-name: kh-up; }
+.kh-down { animation-name: kh-down; }
+.kh-left { animation-name: kh-left; }
+.kh-right { animation-name: kh-right; }
+@keyframes kh-up { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 8px)); } }
+@keyframes kh-down { from { transform: translateY(calc(-50% - 8px)); } to { transform: translateY(0); } }
+@keyframes kh-left { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 6px)); } }
+@keyframes kh-right { from { transform: translateX(calc(-50% - 6px)); } to { transform: translateX(0); } }
+.kh-tile { transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
+.kh-tile:hover, .kh-tile:focus-visible { transform: rotate(0deg) scale(1.06) translateZ(30px); z-index: 2; box-shadow: 0 30px 60px -20px rgba(107,16,38,.7); }
+.kh-spin { animation: kh-spin 14s linear infinite; }
+@keyframes kh-spin { to { transform: rotate(360deg); } }
+.kh-badge { transition: transform .3s; }
+.kh-badge:hover { transform: scale(1.08) rotate(-6deg); }
+.kh-in { animation: kh-in .8s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes kh-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.kh-dot { animation: kh-pulse 1.6s ease-in-out infinite; }
+@keyframes kh-pulse { 50% { opacity: .35; transform: scale(.7); } }
+@media (prefers-reduced-motion: reduce) {
+  .kh-track, .kh-spin, .kh-in, .kh-dot { animation: none; }
+  .kh-wall { transform: rotateX(10deg) rotateY(-12deg) rotateZ(6deg); }
+}
+
+/* ---------- In-store only panel (src/components/InStoreOnly.tsx) ---------- */
+.iso-awning { transform-origin: 130px 44px; animation: iso-sway 3.2s ease-in-out infinite; }
+@keyframes iso-sway { 50% { transform: rotate(1.6deg); } }
+.iso-sign { transform-origin: 181px 132px; animation: iso-swing 2.4s ease-in-out infinite; }
+@keyframes iso-swing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.iso-pop { --dx: 60px; opacity: 0; animation: iso-pop 4.4s cubic-bezier(.3,.7,.4,1) infinite; }
+@keyframes iso-pop {
+  0% { opacity: 0; transform: translate(0, 0) scale(.3) rotate(0deg); }
+  12% { opacity: 1; }
+  45% { transform: translate(calc(var(--dx) * .6), -120px) scale(1.15) rotate(-12deg); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), -190px) scale(.9) rotate(14deg); }
+}
+.iso-twinkle { animation: iso-twinkle 2.8s ease-in-out infinite; }
+@keyframes iso-twinkle { 0%, 100% { opacity: .2; transform: scale(.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.2) rotate(45deg); } }
+.iso-reel { transform-origin: left; animation: iso-reel 3s linear infinite; }
+@keyframes iso-reel { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.iso-heart { animation: iso-heart 1.2s ease-in-out infinite; }
+@keyframes iso-heart { 30% { transform: scale(1.5); } }
+@media (prefers-reduced-motion: reduce) {
+  .iso-awning, .iso-sign, .iso-twinkle, .iso-reel, .iso-heart { animation: none; }
+  .iso-pop { animation: none; opacity: 1; }
+}

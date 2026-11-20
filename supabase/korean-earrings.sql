@@ -1,0 +1,665 @@
+-- Radhe Boutique: add the "Korean Earrings" category (50 products) and hide everything else.
+-- Run once in the Supabase SQL editor. Safe to re-run: products are skipped if their slug exists.
+begin;
+
+-- 1. Allow the new category
+alter table products drop constraint if exists products_category_check;
+alter table products add constraint products_category_check
+  check (category in ('anti-tarnish','earrings','necklace-sets','hasli','bracelets','rings','kurtis','korean-earrings'));
+
+-- 2. Hide (not delete) every existing product. Undo with:
+--    update products set active = true where category <> 'korean-earrings';
+update products set active = false, featured = false where category <> 'korean-earrings';
+
+-- #1 Tulip Drop Earrings  (cost Rs 19 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-tulip-drop-earrings', 'Tulip Drop Earrings', 'korean-earrings', 39, 'Tulip Drop Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01KIU7781vr6IdD8POt__1592666225-0-cib_0700a61f-9728-4e02-8de2-331b72ef2d13.jpg", "kind": "photo", "alt": "Tulip Drop Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN012r7JS91vr6M1syQQv__1592666225-0-cib_ae1f4409-5343-45cf-9979-e729d4d88c3f.jpg", "kind": "photo", "alt": "Tulip Drop Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN011QLMfa1vr6M0pOxoV__1592666225-0-cib_a1a22bc0-0975-4007-8bdb-66292e884a80.jpg", "kind": "photo", "alt": "Tulip Drop Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ257', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #2 Forest Leaf Earrings  (cost Rs 14 -> Rs 29)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-forest-leaf-earrings', 'Forest Leaf Earrings', 'korean-earrings', 29, 'Forest Leaf Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Lkpt1w1vr6ONZvztY__1592666225-0-cib.jpg", "kind": "photo", "alt": "Forest Leaf Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Kcacg61vr6RBOJ0S3__1592666225-0-cib_3b718613-a49b-4c34-a873-70cd456db9e0.jpg", "kind": "photo", "alt": "Forest Leaf Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01jbMEFs1vr6RBOJg5Q__1592666225-0-cib_4fee8691-8bd0-4ce7-8b7b-3d5979ad6aea.jpg", "kind": "photo", "alt": "Forest Leaf Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ260R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #3 Retro Cloud Geometric Earrings  (cost Rs 13 -> Rs 29)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-retro-cloud-geometric-earrings', 'Retro Cloud Geometric Earrings', 'korean-earrings', 29, 'Retro Cloud Geometric Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01BekQQS1vr6aSj3Z3X__1592666225-0-cib.jpg", "kind": "photo", "alt": "Retro Cloud Geometric Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01rNawfj1vr6aTFlxyC__1592666225-0-cib.jpg", "kind": "photo", "alt": "Retro Cloud Geometric Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01V6a4NM1vr6aUBWOo2__1592666225-0-cib.jpg", "kind": "photo", "alt": "Retro Cloud Geometric Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ142R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #4 Fairy Butterfly Earrings  (cost Rs 43 -> Rs 89)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-fairy-butterfly-earrings', 'Fairy Butterfly Earrings', 'korean-earrings', 89, 'Fairy Butterfly Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN0159TyID1vr6KRj37UR__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fairy Butterfly Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01sz5hWY1vr6KieINyd__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fairy Butterfly Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018tKG071vr6Kacorzj__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fairy Butterfly Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Purple', null, 'KE-SJ254', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #5 Water Drop Earrings  (cost Rs 23 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-water-drop-earrings', 'Water Drop Earrings', 'korean-earrings', 49, 'Water Drop Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01F9bjTL1vr6PUZhbkC__1592666225-0-cib.jpg", "kind": "photo", "alt": "Water Drop Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01l1xcCT1vr6PI8wriv__1592666225-0-cib_504a8e89-f4b7-4170-b299-fd050046e2ae.jpg", "kind": "photo", "alt": "Water Drop Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01U4BaWA1vr6PQNMDlg__1592666225-0-cib_65334440-5a0c-4c4b-a781-f8dd0957f665.jpg", "kind": "photo", "alt": "Water Drop Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('White', null, 'KE-SJ153', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #6 Double V Earrings  (cost Rs 36 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-double-v-earrings', 'Double V Earrings', 'korean-earrings', 79, 'Double V Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01oGkmoK1vr6ZAa0jqU__1592666225-0-cib.jpg", "kind": "photo", "alt": "Double V Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN010Ea6AD1vr6ZBRLr7F__1592666225-0-cib.jpg", "kind": "photo", "alt": "Double V Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01V483Kn1vr6Z9uMbbZ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Double V Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ56', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #7 Everyday Korean Earrings  (cost Rs 17 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-everyday-korean-earrings', 'Everyday Korean Earrings', 'korean-earrings', 39, 'Everyday Korean Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01qWve5I1vr6ElWOVYB__1592666225-0-cib.jpg", "kind": "photo", "alt": "Everyday Korean Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01kIUF7y1vr6EmlVQ6U__1592666225-0-cib.jpg", "kind": "photo", "alt": "Everyday Korean Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018JYbKl1vr6Z8FvGPr__1592666225-0-cib.jpg", "kind": "photo", "alt": "Everyday Korean Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ174', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #8 Celebrity Pearl Earrings  (cost Rs 35 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-celebrity-pearl-earrings', 'Celebrity Pearl Earrings', 'korean-earrings', 79, 'Celebrity Pearl Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/20567394033_1950307735.jpg", "kind": "photo", "alt": "Celebrity Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/20567373470_1950307735.jpg", "kind": "photo", "alt": "Celebrity Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/20642707150_1950307735.jpg", "kind": "photo", "alt": "Celebrity Pearl Earrings"}]'::jsonb, true, true)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ281', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #9 Sparkle Bow Earrings  (cost Rs 23 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-sparkle-bow-earrings', 'Sparkle Bow Earrings', 'korean-earrings', 49, 'Sparkle Bow Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01RJHpVi1vr6b9hqA5i__1592666225-0-cib.jpg", "kind": "photo", "alt": "Sparkle Bow Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN013Jk4b21vr6L8GisVL__1592666225-0-cib_4257fa86-7e77-49aa-8d25-44660ee4b9b9.jpg", "kind": "photo", "alt": "Sparkle Bow Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Maroon', null, 'KE-SJ-332', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #10 Water Ripple Square Earrings  (cost Rs 35 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-water-ripple-square-earrings', 'Water Ripple Square Earrings', 'korean-earrings', 79, 'Water Ripple Square Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01xT7P5E1vr6QZEJs4O__1592666225-0-cib_c58f2dd5-1b45-43ad-b84e-734eae4b2dcc.jpg", "kind": "photo", "alt": "Water Ripple Square Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01VxwAFN1vr6Se96nxl__1592666225-0-cib_ae703028-bf4a-4962-b03d-dc6762132ed3.jpg", "kind": "photo", "alt": "Water Ripple Square Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN016ZbtsX1vr6Scet5Tf__1592666225-0-cib_0a30caa7-5de8-4993-8902-8a0aec79a3cd.jpg", "kind": "photo", "alt": "Water Ripple Square Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ124', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #11 Zircon Mermaid Pearl Hoops  (cost Rs 23 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-zircon-mermaid-pearl-hoops', 'Zircon Mermaid Pearl Hoops', 'korean-earrings', 49, 'Zircon Mermaid Pearl Hoops in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01MiBEIM1vr6YoJaKdH__1592666225-0-cib.jpg", "kind": "photo", "alt": "Zircon Mermaid Pearl Hoops"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01A6esKZ1vr6Ynn0TMG__1592666225-0-cib.jpg", "kind": "photo", "alt": "Zircon Mermaid Pearl Hoops"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01iSwG621vr6Ypk0htI__1592666225-0-cib.jpg", "kind": "photo", "alt": "Zircon Mermaid Pearl Hoops"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ15', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #12 Four-Petal Flower Earrings  (cost Rs 28 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-four-petal-flower-earrings', 'Four-Petal Flower Earrings', 'korean-earrings', 59, 'Four-Petal Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN016N5HS31vr6IzVz1fw__1592666225-0-cib_d2797de6-3d9d-47e7-99dc-965bfef7b175.jpg", "kind": "photo", "alt": "Four-Petal Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN015guiI51vr6J5YBY5v__1592666225-0-cib.jpg", "kind": "photo", "alt": "Four-Petal Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ267', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #13 Lavender Heart Earrings  (cost Rs 32 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-lavender-heart-earrings', 'Lavender Heart Earrings', 'korean-earrings', 69, 'Lavender Heart Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN014gbFCm1vr6VkOQvdS__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lavender Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01N7jtxs1vr6ZoAyfcE__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lavender Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01v8f9tX1vr6bpdIUmR__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lavender Heart Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ278', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #14 Crystal Rhombus Wing Earrings  (cost Rs 26 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-crystal-rhombus-wing-earrings', 'Crystal Rhombus Wing Earrings', 'korean-earrings', 59, 'Crystal Rhombus Wing Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN014ArQ6k1vr6ZtvcjWO__1592666225-0-cib.jpg", "kind": "photo", "alt": "Crystal Rhombus Wing Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01MHi0ZG1vr6ZuRYKl6__1592666225-0-cib.jpg", "kind": "photo", "alt": "Crystal Rhombus Wing Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01uIipi91vr6ZuRWixL__1592666225-0-cib.jpg", "kind": "photo", "alt": "Crystal Rhombus Wing Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ232R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #15 Camellia Earrings  (cost Rs 33 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-camellia-earrings', 'Camellia Earrings', 'korean-earrings', 69, 'Camellia Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018boroD1vr6IGd4w7X__1592666225-0-cib.jpg", "kind": "photo", "alt": "Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018eznGU1vr6IJdNt9X__1592666225-0-cib_e5dd5f00-e92d-40d6-bd15-9f58b3d10326.jpg", "kind": "photo", "alt": "Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Rgo6Zq1vr6IEROn47__1592666225-0-cib.jpg", "kind": "photo", "alt": "Camellia Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Black', null, 'KE-SJ272', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #16 Minimal Statement Earrings  (cost Rs 21 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-minimal-statement-earrings', 'Minimal Statement Earrings', 'korean-earrings', 49, 'Minimal Statement Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN013BoODI1vr6IyIsVdH__1592666225-0-cib_2f708213-bb9c-4de2-8add-051503152e3a.jpg", "kind": "photo", "alt": "Minimal Statement Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01lly3m31vr6IspyVHq__1592666225-0-cib_87bc96f2-e884-4891-be51-f20f77453624.jpg", "kind": "photo", "alt": "Minimal Statement Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN014JBHrG1vr6IyJKq7Z__1592666225-0-cib_c3b5e9b7-fa6d-4437-9a97-c718740500dd.jpg", "kind": "photo", "alt": "Minimal Statement Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Silver', '#C0C0C0', 'KE-SJ151-SLV', 6, 0),
+  ('Golden', '#D4AF37', 'KE-SJ151-GLD', 6, 1)
+) as v(name, swatch, sku, stock, position);
+
+-- #17 Autumn-Winter Korean Earrings  (cost Rs 29 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-autumn-winter-korean-earrings', 'Autumn-Winter Korean Earrings', 'korean-earrings', 59, 'Autumn-Winter Korean Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Ymw9dB1vr6RzHL8c9__1592666225-0-cib_bb5b7cca-2804-49ab-a99e-7adc23937140.jpg", "kind": "photo", "alt": "Autumn-Winter Korean Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN0146vw6H1vr6S1LRPzi__1592666225-0-cib_15b0943d-d8f7-4260-84fe-be8ab0b4d190.jpg", "kind": "photo", "alt": "Autumn-Winter Korean Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01eBsZvv1vr6S4shtAo__1592666225-0-cib_f98ac6c8-5d2e-46eb-b613-c61321d5f798.jpg", "kind": "photo", "alt": "Autumn-Winter Korean Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ-333', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #18 Monet Flower Baroque Pearl Earrings  (cost Rs 41 -> Rs 89)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-monet-flower-baroque-pearl-earrings', 'Monet Flower Baroque Pearl Earrings', 'korean-earrings', 89, 'Monet Flower Baroque Pearl Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Sgxvzo1vr6YnbBEcI__1592666225-0-cib.jpg", "kind": "photo", "alt": "Monet Flower Baroque Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01jb6kR91vr6YowLAst__1592666225-0-cib.jpg", "kind": "photo", "alt": "Monet Flower Baroque Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01ctHE551vr6YoKW8TJ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Monet Flower Baroque Pearl Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ10', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #19 Colour Pop Heart Earrings  (cost Rs 18 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-colour-pop-heart-earrings', 'Colour Pop Heart Earrings', 'korean-earrings', 39, 'Colour Pop Heart Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01dpxy211onFvgRsyBE__2059265269-0-cib.jpg", "kind": "photo", "alt": "Colour Pop Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN017vjJzt1onFvbzuBdg__2059265269-0-cib.jpg", "kind": "photo", "alt": "Colour Pop Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018waSnA1onFveXXZqA__2059265269-0-cib.jpg", "kind": "photo", "alt": "Colour Pop Heart Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ214', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #20 Peach Heart Earrings  (cost Rs 16 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-peach-heart-earrings', 'Peach Heart Earrings', 'korean-earrings', 39, 'Peach Heart Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01vsUEUG1vr6SboJyxV__1592666225-0-cib_bea453fa-2a18-480b-8600-ff62b4be791e.jpg", "kind": "photo", "alt": "Peach Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01RMdjbQ1vr6SaQR8An__1592666225-0-cib_fd694582-b500-4e6e-b37e-d10e83a7a347.jpg", "kind": "photo", "alt": "Peach Heart Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Silver', null, 'KE-SJ263', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #21 Ruby Red Retro Stone Earrings  (cost Rs 31 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-ruby-red-retro-stone-earrings', 'Ruby Red Retro Stone Earrings', 'korean-earrings', 69, 'Ruby Red Retro Stone Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01WHJekJ1vr6YvxZuyJ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Ruby Red Retro Stone Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01MGQXIh1vr6YvxVM5o__1592666225-0-cib.jpg", "kind": "photo", "alt": "Ruby Red Retro Stone Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01RgZe3X1vr6YxUfcAh__1592666225-0-cib.jpg", "kind": "photo", "alt": "Ruby Red Retro Stone Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Red', null, 'KE-SJ59', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #22 Silk Flower Earrings  (cost Rs 30 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-silk-flower-earrings', 'Silk Flower Earrings', 'korean-earrings', 69, 'Silk Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01wzZhYW1vr6YxNwU8j__1592666225-0-cib.jpg", "kind": "photo", "alt": "Silk Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01BWVmHg1vr6YuwGw8s__1592666225-0-cib.jpg", "kind": "photo", "alt": "Silk Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ23', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #23 Black Pearl Flower Earrings  (cost Rs 22 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-black-pearl-flower-earrings', 'Black Pearl Flower Earrings', 'korean-earrings', 49, 'Black Pearl Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN0189jpxp1vr6aAfWzFN__1592666225-0-cib.jpg", "kind": "photo", "alt": "Black Pearl Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN017JQ8W51vr6aAcVya5__1592666225-0-cib.jpg", "kind": "photo", "alt": "Black Pearl Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Black', null, 'KE-SJ244R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #24 Peacock Crystal Earrings  (cost Rs 44 -> Rs 89)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-peacock-crystal-earrings', 'Peacock Crystal Earrings', 'korean-earrings', 89, 'Peacock Crystal Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01tmFGrE1vr6YyDUy5h__1592666225-0-cib.jpg", "kind": "photo", "alt": "Peacock Crystal Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01E4CbBU1vr6YyOYEg6__1592666225-0-cib.jpg", "kind": "photo", "alt": "Peacock Crystal Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01EPR2jp1vr6YwOJ0PZ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Peacock Crystal Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ27', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #25 Fan Stud Earrings  (cost Rs 18 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-fan-stud-earrings', 'Fan Stud Earrings', 'korean-earrings', 39, 'Fan Stud Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN012NN3KX1vr6ZiqyvMJ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fan Stud Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01YpbMCE1vr6ZhHDKMC__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fan Stud Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01n5vJNc1vr6ZiRpmR5__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fan Stud Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ305', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #26 Natural Stone Earrings  (cost Rs 44 -> Rs 89)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-natural-stone-earrings', 'Natural Stone Earrings', 'korean-earrings', 89, 'Natural Stone Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/20723825865_1950307735.jpg", "kind": "photo", "alt": "Natural Stone Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/20723819935_1950307735.jpg", "kind": "photo", "alt": "Natural Stone Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01ATFhPI1vr6YmteEE1__1592666225-0-cib.jpg", "kind": "photo", "alt": "Natural Stone Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ93', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #27 Heart Crystal Earrings  (cost Rs 37 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-heart-crystal-earrings', 'Heart Crystal Earrings', 'korean-earrings', 79, 'Heart Crystal Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01xvhIAj1vr6ZAVAPby__1592666225-0-cib.jpg", "kind": "photo", "alt": "Heart Crystal Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01nRPE0D1vr6ZD3Fnkk__1592666225-0-cib.jpg", "kind": "photo", "alt": "Heart Crystal Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN015A96DJ1vr6YvPM4xb__1592666225-0-cib.jpg", "kind": "photo", "alt": "Heart Crystal Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ34', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #28 Glazed Camellia Earrings  (cost Rs 19 -> Rs 39)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-glazed-camellia-earrings', 'Glazed Camellia Earrings', 'korean-earrings', 39, 'Glazed Camellia Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01VrREwk1vr6blGE9DV__1592666225-0-cib.jpg", "kind": "photo", "alt": "Glazed Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01k5IlGb1vr6bIVbb6c__1592666225-0-cib.jpg", "kind": "photo", "alt": "Glazed Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01fFtwzt1vr6VnDFD3J__1592666225-0-cib_983ff9a8-ce3b-451b-b3f9-529f27e969ce.jpg", "kind": "photo", "alt": "Glazed Camellia Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ-11', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #29 Colour Block Earrings  (cost Rs 25 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-colour-block-earrings', 'Colour Block Earrings', 'korean-earrings', 59, 'Colour Block Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01pUyc1h1vr6CmIcZO9__1592666225-0-cib_90ab60ff-37b5-484b-bdba-c0b3ea2668c6.jpg", "kind": "photo", "alt": "Colour Block Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01JNHmGU1vr6Ckg9ICT__1592666225-0-cib_69e804fa-2652-4283-a7d6-24bfdbb1d124.jpg", "kind": "photo", "alt": "Colour Block Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01J016ua1vr6CoQNULU__1592666225-0-cib_84f786ee-d5c9-4a39-901c-0b51320f0de0.jpg", "kind": "photo", "alt": "Colour Block Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ201', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #30 French Retro Pearl Flower Earrings  (cost Rs 32 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-french-retro-pearl-flower-earrings', 'French Retro Pearl Flower Earrings', 'korean-earrings', 69, 'French Retro Pearl Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01tSusNF1vr6YonKvca__1592666225-0-cib.jpg", "kind": "photo", "alt": "French Retro Pearl Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01TR3kj61vr6Yp8dbSX__1592666225-0-cib.jpg", "kind": "photo", "alt": "French Retro Pearl Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN016TNTgb1vr6YmrwT69__1592666225-0-cib.jpg", "kind": "photo", "alt": "French Retro Pearl Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ25', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #31 Geometric Sparkle Earrings  (cost Rs 26 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-geometric-sparkle-earrings', 'Geometric Sparkle Earrings', 'korean-earrings', 59, 'Geometric Sparkle Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01gShKIu1vr6WjWyvh8__1592666225-0-cib_2ffa958f-d67a-430b-89e5-8aefe6e31893.jpg", "kind": "photo", "alt": "Geometric Sparkle Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01k6Qyhs1vr6WhwvQHD__1592666225-0-cib_0b3a26f8-bcd4-45ff-848c-d00b460a95de.jpg", "kind": "photo", "alt": "Geometric Sparkle Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01syTire1vr6WQF3tq6__1592666225-0-cib.jpg", "kind": "photo", "alt": "Geometric Sparkle Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ189', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #32 Midnight Black Earrings  (cost Rs 25 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-midnight-black-earrings', 'Midnight Black Earrings', 'korean-earrings', 59, 'Midnight Black Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01HQ1yt51vr6KL1mI1z__1592666225-0-cib_f702fafc-62fa-4377-9490-5aa0e9bb57a0.jpg", "kind": "photo", "alt": "Midnight Black Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01AsLkkg1vr6KWVOJFZ__1592666225-0-cib_1bb67670-20ec-4f92-abc2-170123648d1e.jpg", "kind": "photo", "alt": "Midnight Black Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01hjrh2O1vr6R9p26QM__1592666225-0-cib_f06d6a89-0fd4-416a-9419-dc65b5bec8ce.jpg", "kind": "photo", "alt": "Midnight Black Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Black', null, 'KE-SJ154', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #33 Oil Painting Butterfly Earrings  (cost Rs 27 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-oil-painting-butterfly-earrings', 'Oil Painting Butterfly Earrings', 'korean-earrings', 59, 'Oil Painting Butterfly Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01HFRy5y1vr6ZrVwe0W__1592666225-0-cib.jpg", "kind": "photo", "alt": "Oil Painting Butterfly Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN017cZk0R1vr6Zqf11xU__1592666225-0-cib.jpg", "kind": "photo", "alt": "Oil Painting Butterfly Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ242R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #34 Full Sparkle Heart Earrings  (cost Rs 27 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-full-sparkle-heart-earrings', 'Full Sparkle Heart Earrings', 'korean-earrings', 59, 'Full Sparkle Heart Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01uQCA6O1vr6aYfm6xf__1592666225-0-cib.jpg", "kind": "photo", "alt": "Full Sparkle Heart Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01BkVDwo1vr6aXghuL9__1592666225-0-cib.jpg", "kind": "photo", "alt": "Full Sparkle Heart Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Silver', null, 'KE-SJ156R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #35 Blossom Earrings  (cost Rs 30 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-blossom-earrings', 'Blossom Earrings', 'korean-earrings', 69, 'Blossom Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01cpCcce1vr6bMghQ9M__1592666225-0-cib.jpg", "kind": "photo", "alt": "Blossom Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01NSa33c1vr6bN38bDp__1592666225-0-cib.jpg", "kind": "photo", "alt": "Blossom Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ130R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #36 Glossy Flower & Leaf Earrings  (cost Rs 35 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-glossy-flower-leaf-earrings', 'Glossy Flower & Leaf Earrings', 'korean-earrings', 79, 'Glossy Flower & Leaf Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01GIdVxP1vr6U4KB0zG__1592666225-0-cib_4565feda-9687-437e-b809-805d28f135e4.jpg", "kind": "photo", "alt": "Glossy Flower & Leaf Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN018TX1Kv1vr6U2h9ZEh__1592666225-0-cib.jpg", "kind": "photo", "alt": "Glossy Flower & Leaf Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01tLGLSU1vr6U2aN24P__1592666225-0-cib_dc5e8ba6-7f67-44ad-bdce-482686eff9ba.jpg", "kind": "photo", "alt": "Glossy Flower & Leaf Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Golden', null, 'KE-SJ251', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #37 French Camellia Earrings  (cost Rs 30 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-french-camellia-earrings', 'French Camellia Earrings', 'korean-earrings', 69, 'French Camellia Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01pRhNHW1vr6awYkinQ__1592666225-0-cib.jpg", "kind": "photo", "alt": "French Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01uxih6Z1vr6awuLJBI__1592666225-0-cib.jpg", "kind": "photo", "alt": "French Camellia Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ170R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #38 Lovely Charm Earrings  (cost Rs 35 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-lovely-charm-earrings', 'Lovely Charm Earrings', 'korean-earrings', 79, 'Lovely Charm Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01CJ6ZoW1vr6NZGQDZO__1592666225-0-cib_d6a68a2b-d63f-40a4-bbde-d2faacea86da.jpg", "kind": "photo", "alt": "Lovely Charm Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN014LfKRu1vr6NY6k3Qv__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lovely Charm Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ323', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #39 Mermaid Pearl Earrings  (cost Rs 39 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-mermaid-pearl-earrings', 'Mermaid Pearl Earrings', 'korean-earrings', 79, 'Mermaid Pearl Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01vKTRYX1vr6GbjiWMP__1592666225-0-cib.jpg", "kind": "photo", "alt": "Mermaid Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01W2VRS01vr6GV9ByFL__1592666225-0-cib_77dc8632-cec8-4703-8dcc-14079b29a764.jpg", "kind": "photo", "alt": "Mermaid Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01LfjUmX1vr6GYx4o4t__1592666225-0-cib_971afc78-7d9a-4d30-9b37-d3bf9e8db370.jpg", "kind": "photo", "alt": "Mermaid Pearl Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted design', null, 'KE-SJ285', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #40 Petite White Camellia Earrings  (cost Rs 20 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-petite-white-camellia-earrings', 'Petite White Camellia Earrings', 'korean-earrings', 49, 'Petite White Camellia Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN013wlkAS1vr6Gfmlh7U__1592666225-0-cib.jpg", "kind": "photo", "alt": "Petite White Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN011XOsU91vr6GXKCTwh__1592666225-0-cib.jpg", "kind": "photo", "alt": "Petite White Camellia Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01q5Mzuv1vr6GXKFQs6__1592666225-0-cib.jpg", "kind": "photo", "alt": "Petite White Camellia Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('White', null, 'KE-SJ216', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #41 Watercolour Wave C-Hoops  (cost Rs 39 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-watercolour-wave-c-hoops', 'Watercolour Wave C-Hoops', 'korean-earrings', 79, 'Watercolour Wave C-Hoops in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01qWckwJ1vr6aJq1vuw__1592666225-0-cib.jpg", "kind": "photo", "alt": "Watercolour Wave C-Hoops"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01e8vGmy1vr6aML2Gos__1592666225-0-cib.jpg", "kind": "photo", "alt": "Watercolour Wave C-Hoops"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01lx0xJ61vr6aKc2paf__1592666225-0-cib.jpg", "kind": "photo", "alt": "Watercolour Wave C-Hoops"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ282R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #42 Sparkle Flower Earrings  (cost Rs 24 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-sparkle-flower-earrings', 'Sparkle Flower Earrings', 'korean-earrings', 49, 'Sparkle Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01DKxaJH1vr6Y0nGegA__1592666225-0-cib_914e6b3f-8ad4-4985-a0f9-5aa4a795ffee.jpg", "kind": "photo", "alt": "Sparkle Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01eQYTUk1vr6Y0Vc07N__1592666225-0-cib.jpg", "kind": "photo", "alt": "Sparkle Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01MnaJxX1vr6XyiIv8J__1592666225-0-cib_29d925ab-5068-4152-a34f-a46a44526360.jpg", "kind": "photo", "alt": "Sparkle Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ268', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #43 Sea Blue Double-Ring Earrings  (cost Rs 25 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-sea-blue-double-ring-earrings', 'Sea Blue Double-Ring Earrings', 'korean-earrings', 59, 'Sea Blue Double-Ring Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01lApIMu1vr6bnoevPC__1592666225-0-cib.jpg", "kind": "photo", "alt": "Sea Blue Double-Ring Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01DgIQ5B1vr6bmy1cp2__1592666225-0-cib.jpg", "kind": "photo", "alt": "Sea Blue Double-Ring Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01ymr0jk1vr6bnOZF2W__1592666225-0-cib.jpg", "kind": "photo", "alt": "Sea Blue Double-Ring Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Sea blue', null, 'KE-SJ-349', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #44 Triangle Pearl Earrings  (cost Rs 33 -> Rs 69)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-triangle-pearl-earrings', 'Triangle Pearl Earrings', 'korean-earrings', 69, 'Triangle Pearl Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01nIfvKh1vr6XM1tS0Y__1592666225-0-cib_bf03558d-8f5f-4e01-8c78-9d6d4f1cf0aa.jpg", "kind": "photo", "alt": "Triangle Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01pPd5OQ1vr6XjRO2i5__1592666225-0-cib_05c14dea-76fc-4ee1-8ae6-7754cc7f7800.jpg", "kind": "photo", "alt": "Triangle Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01u2xeMN1vr6XKUyA2h__1592666225-0-cib_b9e8b4d9-c0e2-4beb-9bf4-da3cb1eff425.jpg", "kind": "photo", "alt": "Triangle Pearl Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ264', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #45 Spray Paint Flower Earrings  (cost Rs 38 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-spray-paint-flower-earrings', 'Spray Paint Flower Earrings', 'korean-earrings', 79, 'Spray Paint Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01yo5o5O1vr6Yw5fmnT__1592666225-0-cib_8b6e74f8-64c6-404a-bf66-38873fdb697f.jpg", "kind": "photo", "alt": "Spray Paint Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01KVDzT41vr6Gb8SCTC__1592666225-0-cib_8db7a03e-ad78-4972-9097-c3fd5c193a38.jpg", "kind": "photo", "alt": "Spray Paint Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01Dclvld1vr6Ghpk4Zg__1592666225-0-cib_2cac3ee7-b944-47d2-87c6-6813fe7051d1.jpg", "kind": "photo", "alt": "Spray Paint Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ-12', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #46 Lucky Clover Enamel Earrings  (cost Rs 21 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-lucky-clover-enamel-earrings', 'Lucky Clover Enamel Earrings', 'korean-earrings', 49, 'Lucky Clover Enamel Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair. Colours vary; we send the one available, or message us on WhatsApp to choose.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN010TA0Es1vr6Sy3ixLQ__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lucky Clover Enamel Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01uKIsJ61vr6SzJCdJd__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lucky Clover Enamel Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01TJQbxx1vr6T1fKADV__1592666225-0-cib.jpg", "kind": "photo", "alt": "Lucky Clover Enamel Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Assorted colour', null, 'KE-SJ-124', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #47 Broken Circle Earrings  (cost Rs 21 -> Rs 49)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-broken-circle-earrings', 'Broken Circle Earrings', 'korean-earrings', 49, 'Broken Circle Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01oj6eiE1vr6ZKo1z7a__1592666225-0-cib.jpg", "kind": "photo", "alt": "Broken Circle Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01ah09sN1vr6ZMbeMdn__1592666225-0-cib.jpg", "kind": "photo", "alt": "Broken Circle Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01obEMdT1vr6ZKVJ5na__1592666225-0-cib.jpg", "kind": "photo", "alt": "Broken Circle Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Silver', null, 'KE-SJ4', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #48 Korean Four-Leaf Flower Earrings  (cost Rs 27 -> Rs 59)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-korean-four-leaf-flower-earrings', 'Korean Four-Leaf Flower Earrings', 'korean-earrings', 59, 'Korean Four-Leaf Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01wtuTOQ1vr6WsnuUXW__1592666225-0-cib_dd6e2b91-38f1-4a41-9cc6-ca7e343615b7.jpg", "kind": "photo", "alt": "Korean Four-Leaf Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01ivxoyU1vr6XK70WiB__1592666225-0-cib_523b25b1-fe78-467a-8927-b5ad1bc16059.jpg", "kind": "photo", "alt": "Korean Four-Leaf Flower Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01UrYtjg1vr6WoR163j__1592666225-0-cib_03b6e831-95d7-492b-97b6-a62e5fe8fd3e.jpg", "kind": "photo", "alt": "Korean Four-Leaf Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('White', null, 'KE-SJ-189', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #49 Antique Green Flower Earrings  (cost Rs 40 -> Rs 89)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-antique-green-flower-earrings', 'Antique Green Flower Earrings', 'korean-earrings', 89, 'Antique Green Flower Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01vFpxyi1vr6b2rIo7R__1592666225-0-cib.jpg", "kind": "photo", "alt": "Antique Green Flower Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Green', null, 'KE-SJ49R', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+-- #50 Fairy Pearl Earrings  (cost Rs 39 -> Rs 79)
+with p as (
+  insert into products (slug, name, category, price, description, tags, images, active, featured)
+  values ('korean-fairy-pearl-earrings', 'Fairy Pearl Earrings', 'korean-earrings', 79, 'Fairy Pearl Earrings in trendy Korean style. Lightweight and easy to wear all day. Price is for one pair.',
+          array['korean','earrings','trendy']::text[], '[{"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN012jxcsb1vr6YpQTf7h__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fairy Pearl Earrings"}, {"url": "https://cdn.shopify.com/s/files/1/0648/1186/0135/files/O1CN01YukNJP1vr6YpkbIN9__1592666225-0-cib.jpg", "kind": "photo", "alt": "Fairy Pearl Earrings"}]'::jsonb, true, false)
+  on conflict (slug) do nothing
+  returning id
+)
+insert into variants (product_id, name, swatch, sku, stock, position)
+select p.id, v.name, v.swatch, v.sku, v.stock, v.position from p, (values
+  ('Standard', null, 'KE-SJ53', 6, 0)
+) as v(name, swatch, sku, stock, position);
+
+commit;
