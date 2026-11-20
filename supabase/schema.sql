@@ -111,3 +111,13 @@ on conflict (id) do nothing;
 -- Upgrade path for databases created before live try-on existed (safe to re-run).
 alter table products add column if not exists try_on_image text;
 alter table variants add column if not exists try_on_image text;
+
+-- The website's server key (service_role) needs table access. Newer Supabase projects
+-- don't grant it automatically for tables created in the SQL editor.
+grant usage on schema public to service_role;
+grant all on all tables in schema public to service_role;
+grant all on all sequences in schema public to service_role;
+grant execute on all functions in schema public to service_role;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
+alter default privileges in schema public grant execute on functions to service_role;
