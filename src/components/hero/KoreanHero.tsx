@@ -61,11 +61,11 @@ export function KoreanHero({ items, href, startPrice, count, whatsapp }: { items
           <span className="kh-in flex items-center gap-2 self-start rounded-full bg-maroon px-3.5 py-1.5 text-[11px] font-bold tracking-[.18em] text-blush md:text-xs">
             <span className="kh-dot size-2 rounded-full bg-gold" /> NEW DROP · {count} STYLES
           </span>
-          <h1 className="font-display kh-in m-0 text-[68px] leading-[.86] tracking-tight md:text-[132px] lg:text-[150px]" style={{ animationDelay: "80ms" }}>
-            SEOUL
+          <h1 className="font-display kh-in m-0 text-[64px] leading-[.86] tracking-tight md:text-[112px] lg:text-[132px]" style={{ animationDelay: "80ms" }}>
+            KOREAN
             <br />
-            <span className="kh-outline">STYLE</span>
-            <span className="font-serif-italic ml-2 align-top text-[26px] font-semibold normal-case tracking-normal text-pink md:ml-3 md:text-[44px]">for Nashik</span>
+            <span className="kh-outline">KAMAAL</span>
+            <span className="font-serif-italic ml-2 inline-block whitespace-nowrap align-top text-[26px] font-semibold normal-case tracking-normal text-pink md:ml-3 md:text-[44px]">from ₹{startPrice}</span>
           </h1>
           <p className="kh-in m-0 max-w-[400px] text-[15px] leading-relaxed md:text-lg" style={{ animationDelay: "160ms" }}>
             Korean earrings everyone&apos;s wearing: pearls, bows, tulips and hearts. Light enough for all day, priced from <b>₹{startPrice}</b>.
