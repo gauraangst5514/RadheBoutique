@@ -12,7 +12,7 @@ export default function Help() {
         <h2 className="m-0 text-xl font-bold">Shipping &amp; payment</h2>
         {/* TODO: replace with the real courier timelines and charges */}
         <p className="text-[15px] leading-relaxed text-[#4A2A36]">
-          We ship across India. Pay online by UPI or card at checkout, or order on WhatsApp. We don&apos;t offer cash on delivery. You&apos;ll get a WhatsApp update when your parcel is on its way.
+          We ship across India. Place your order on WhatsApp from checkout, and we&apos;ll confirm the order and payment details in chat. We don&apos;t offer cash on delivery. You&apos;ll get a WhatsApp update when your parcel is on its way.
         </p>
       </section>
 

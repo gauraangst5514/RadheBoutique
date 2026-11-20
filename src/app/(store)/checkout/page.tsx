@@ -149,10 +149,9 @@ export default function CheckoutPage() {
         </fieldset>
 
         <fieldset className="m-0 flex flex-col gap-2.5 border-0 p-0">
-          <legend className="mb-3 text-lg font-bold">Payment</legend>
+          <legend className="mb-3 text-lg font-bold">How to order</legend>
           {online && <Pay id="razorpay" method={method} setMethod={setMethod} title="Pay online" sub="UPI, cards, net banking (Razorpay)" />}
           <Pay id="whatsapp" method={method} setMethod={setMethod} title="Order on WhatsApp" sub="Send the order to us in chat and we'll confirm" />
-          {online === false && <p className="m-0 text-xs text-muted">Online payment will appear here once Razorpay is connected.</p>}
         </fieldset>
 
         {error && <p role="alert" className="m-0 rounded-xl bg-[#FBE4E7] p-3 font-bold text-bad">{error}</p>}

@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     };
 
     if (method === "razorpay") {
-      if (!razorpayEnabled) return NextResponse.json({ error: "Online payment isn't set up yet. Please order on WhatsApp for now." }, { status: 503 });
+      if (!store.onlinePayments || !razorpayEnabled) return NextResponse.json({ error: "Online payment is coming soon. Please order on WhatsApp for now." }, { status: 503 });
       const rzp = await razorpay().orders.create({
         amount: Math.round(totals.total * 100),
         currency: "INR",
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
 
     // Cash on delivery is switched off: the shop takes prepaid (Razorpay) or WhatsApp orders only.
     if (method === "cod") {
-      return NextResponse.json({ error: "Cash on delivery isn't available. Please pay online or order on WhatsApp." }, { status: 400 });
+      return NextResponse.json({ error: "Cash on delivery isn't available. Please order on WhatsApp." }, { status: 400 });
     }
 
     // WhatsApp: record the order, the shop confirms it in chat and then marks it confirmed in admin.

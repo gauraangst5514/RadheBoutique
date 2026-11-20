@@ -231,10 +231,10 @@ export default async function Home() {
               </svg>
             </div>
             <div className="flex flex-col gap-3">
-              <span className="font-serif-italic text-xl text-gold md:text-2xl">Order your way</span>
-              <h2 className="font-display m-0 text-[36px] leading-[.95] md:text-[84px]">UPI, CARD YA WHATSAPP</h2>
+              <span className="font-serif-italic text-xl text-gold md:text-2xl">Easy ordering</span>
+              <h2 className="font-display m-0 text-[36px] leading-[.95] md:text-[84px]">WHATSAPP PE ORDER KARO</h2>
               <p className="m-0 max-w-[480px] text-sm leading-relaxed md:text-[17px]">
-                Pay online with UPI or a card, or just send us the earring names on WhatsApp and we&apos;ll pack them. We ship all over India.
+                Add pieces to your cart and send the order to us on WhatsApp. We confirm everything in chat and ship all over India.
               </p>
               <a
                 href={`https://wa.me/${store.whatsapp}?text=${encodeURIComponent("Hi! I want to order Korean earrings from your website.")}`}

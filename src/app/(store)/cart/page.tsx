@@ -70,7 +70,7 @@ export default function CartPage() {
         <Link href="/checkout" className="mt-1 flex min-h-[54px] items-center justify-center rounded-full bg-pink text-base font-bold text-white no-underline">
           Checkout
         </Link>
-        <p className="m-0 text-center text-xs text-muted">UPI, cards or WhatsApp</p>
+        <p className="m-0 text-center text-xs text-muted">Order on WhatsApp · we ship all over India</p>
       </aside>
     </div>
   );

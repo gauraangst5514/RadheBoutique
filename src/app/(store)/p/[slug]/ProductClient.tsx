@@ -194,7 +194,7 @@ export function ProductClient({ product: p }: { product: Product }) {
 
         <div className="flex flex-col gap-2 rounded-[20px] border border-line bg-paper p-4 text-sm text-[#4A2A36]">
           <span className="text-[15px] font-bold text-ink">Delivery across India</span>
-          <span>Pay by UPI or card, or order on WhatsApp.</span>
+          <span>Order on WhatsApp, we confirm everything in chat.</span>
           <span>Or message us to pick it up at Roongtha SSRF Mall, Nashik.</span>
         </div>
 

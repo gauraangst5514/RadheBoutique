@@ -17,8 +17,11 @@ export const store = {
     flatFee: 0,
     freeAbove: 0, // 0 = always free; otherwise free when subtotal >= this
   },
-  // Cash on delivery is switched off (checkout offers Razorpay and WhatsApp only).
+  // Cash on delivery is switched off.
   codFee: 0,
+  // Online payment (Razorpay: UPI, cards). Off while Razorpay is being set up, so checkout is WhatsApp-only.
+  // Set to true once the Razorpay keys are added and a test order works.
+  onlinePayments: false,
   // Show "Only X left" when a variant's stock is at or below this.
   lowStockAt: 3,
 } as const;

@@ -13,7 +13,7 @@ Website for Radhe Boutique, Nashik: anti-tarnish jewellery, Kashmiri earrings, h
 - Home, shop-by-category, product pages with per-colour/size stock ("Only 2 left", "Sold out"), and "Notify me on WhatsApp" for sold-out variants.
 - **Live try-on** (`/try-on/<product>`): the phone's camera plus MediaPipe face tracking pin earrings to the earlobes (with a little swing) or a necklace under the chin. It runs fully in the browser and the video never leaves the phone. Shoppers can switch colours, save or share a photo, and add to cart. The camera only works on HTTPS or localhost.
 - Cart with the **3 kurtis for ₹999** combo applied automatically (`src/config/store.ts` → `bundles`).
-- Checkout: **Razorpay** (UPI/cards) or **Order on WhatsApp** (opens WhatsApp with the full order typed out). Cash on delivery is switched off, and the server refuses COD orders.
+- Checkout: **Order on WhatsApp** (opens WhatsApp with the full order typed out). **Razorpay** (UPI/cards) is built but switched off until it is set up: set `onlinePayments: true` in `src/config/store.ts` once the keys are in and a test order works. Cash on delivery is off, and the server refuses COD orders.
 - The server re-prices every order and takes stock atomically, so two people can't buy the last piece.
 
 **Admin (`/admin`, phone-first)**

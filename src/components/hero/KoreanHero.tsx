@@ -81,7 +81,7 @@ export function KoreanHero({ items, href, startPrice, count, whatsapp }: { items
           <ul className="kh-in m-0 hidden list-none gap-5 p-0 text-sm font-bold md:flex" style={{ animationDelay: "320ms" }}>
             <li>✦ From ₹{startPrice}</li>
             <li>✦ Ships all India</li>
-            <li>✦ UPI &amp; cards</li>
+            <li>✦ Order on WhatsApp</li>
           </ul>
         </div>
 
