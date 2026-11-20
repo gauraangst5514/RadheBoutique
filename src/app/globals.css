@@ -188,3 +188,40 @@ body {
   .lady-petal { display: none; }
   .pc-img::after { display: none; }
 }
+
+/* ---------- More motion: banners, trust strip, cart, order, product ---------- */
+.pb-shimmer::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-100%); animation: pb-sweep 6s ease-in-out infinite; pointer-events: none; }
+@keyframes pb-sweep { 0%, 55% { transform: translateX(-100%); } 85%, 100% { transform: translateX(100%); } }
+
+.ts-truck { animation: ts-drive 2.4s ease-in-out infinite; overflow: visible; }
+@keyframes ts-drive { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(3px) translateY(-1px); } }
+.ts-speed { animation: ts-speed .6s linear infinite; }
+@keyframes ts-speed { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-6px); } }
+.ts-bubble { animation: ts-bounce 2s ease-in-out infinite; }
+@keyframes ts-bounce { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-4px) rotate(-6deg); } }
+.ts-dot { animation: ts-dot 1.2s ease-in-out infinite; }
+@keyframes ts-dot { 0%, 60%, 100% { opacity: .35; } 30% { opacity: 1; } }
+.ts-pin { transform-origin: 50% 100%; animation: ts-pin 2.2s cubic-bezier(.3,1.5,.5,1) infinite; }
+@keyframes ts-pin { 0%, 70%, 100% { transform: translateY(0) scaleY(1); } 80% { transform: translateY(-6px) scaleY(1.05); } 90% { transform: translateY(0) scaleY(.92); } }
+.ts-item { transition: transform .25s ease, box-shadow .25s ease; }
+.ts-item:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -14px rgba(107,16,38,.5); }
+
+.price-pop { display: inline-block; animation: price-pop .6s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes price-pop { 0% { transform: scale(.6) rotate(-6deg); opacity: 0; } 100% { transform: none; opacity: 1; } }
+
+.bag-wobble { transform-origin: 50% 100%; animation: bag-wobble 3s ease-in-out infinite; }
+@keyframes bag-wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+
+.confetti { --drift: 0px; animation: confetti 3s cubic-bezier(.2,.6,.4,1) both; }
+@keyframes confetti {
+  0% { transform: translate(0, -20px) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--drift), 105vh) rotate(720deg); opacity: .9; }
+}
+
+.ship-bar { background-size: 200% 100%; animation: ship-bar 2.4s linear infinite; background-image: linear-gradient(90deg, #C81E63, #F28C28, #C81E63); }
+@keyframes ship-bar { from { background-position: 0 0; } to { background-position: -200% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-shimmer::after, .ts-truck, .ts-speed, .ts-bubble, .ts-dot, .ts-pin, .price-pop, .bag-wobble, .ship-bar { animation: none; }
+  .confetti { display: none; }
+}

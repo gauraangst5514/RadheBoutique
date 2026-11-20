@@ -118,7 +118,7 @@ export default async function Home() {
         <Hero slides={slides} />
       )}
 
-      <Ticker items={["NEW DROPS EVERY WEEK", "SHIPS ALL OVER INDIA", "ORDER ON WHATSAPP", "ROONGTHA SSRF MALL, NASHIK"]} />
+      <Ticker items={["NEW DROPS EVERY WEEK", `FREE SHIPPING ON ₹${store.shipping.freeAbove}+`, "ORDER ON WHATSAPP", "ROONGTHA SSRF MALL, NASHIK"]} />
 
       {liveCategories.length > 1 && (
       <section className="mx-auto max-w-[1320px] px-4 pt-14 md:px-6 md:pt-[72px]">

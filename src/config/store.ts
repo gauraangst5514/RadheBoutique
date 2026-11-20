@@ -12,10 +12,10 @@ export const store = {
   address: "Roongtha SSRF Mall, 4th floor, Shop 4028, next to City Center Mall, Nashik",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Roongtha+SSRF+Mall+Nashik",
 
-  // TODO: set real shipping rules. Amounts are in rupees.
+  // Shipping, in rupees: ₹49, free when the order (after discounts) is ₹299 or more.
   shipping: {
-    flatFee: 0,
-    freeAbove: 0, // 0 = always free; otherwise free when subtotal >= this
+    flatFee: 49,
+    freeAbove: 299, // 0 = always free; otherwise free when subtotal >= this
   },
   // Cash on delivery is switched off.
   codFee: 0,

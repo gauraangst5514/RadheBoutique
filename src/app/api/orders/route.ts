@@ -70,6 +70,7 @@ export async function POST(req: Request) {
       `Hi Radhe Boutique! Order ${order.number}\n` +
       items.map((i) => `• ${i.name} (${i.variantName}) × ${i.qty} – ${rupees(i.unitPrice * i.qty)}${link(i.productId)}`).join("\n") +
       (totals.discount ? `\nCombo discount: −${rupees(totals.discount)}` : "") +
+      `\nShipping: ${totals.shipping ? rupees(totals.shipping) : "Free"}` +
       `\nTotal: ${rupees(totals.total)}\n\n${customer.name}, ${customer.phone}\n${customer.address}, ${customer.city}, ${customer.state} ${customer.pincode}`;
     return NextResponse.json({ orderId: order.id, whatsappUrl: waLink(text) });
   } catch (e) {

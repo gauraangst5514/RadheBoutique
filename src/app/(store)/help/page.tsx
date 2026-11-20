@@ -1,18 +1,19 @@
 import { store } from "@/config/store";
 import { waLink } from "@/lib/whatsapp";
+import { PageBanner } from "@/components/motion/PageBanner";
 
 export const metadata = { title: "Help" };
 
 export default function Help() {
   return (
     <div className="mx-auto max-w-[760px] px-5 pt-8 md:pt-12">
-      <h1 className="font-display m-0 text-[48px] leading-none md:text-[72px]">HELP</h1>
+      <PageBanner title="Help" eyebrow="Koi sawaal?" line="Shipping, returns and caring for your jewellery." />
 
       <section id="shipping" className="mt-10">
         <h2 className="m-0 text-xl font-bold">Shipping &amp; payment</h2>
         {/* TODO: replace with the real courier timelines and charges */}
         <p className="text-[15px] leading-relaxed text-[#4A2A36]">
-          We ship across India. Place your order on WhatsApp from checkout, and we&apos;ll confirm the order and payment details in chat. We don&apos;t offer cash on delivery. You&apos;ll get a WhatsApp update when your parcel is on its way.
+          We ship across India. Shipping is free on orders of ₹{store.shipping.freeAbove} or more, and ₹{store.shipping.flatFee} below that. Place your order on WhatsApp from checkout, and we&apos;ll confirm the order and payment details in chat. We don&apos;t offer cash on delivery. You&apos;ll get a WhatsApp update when your parcel is on its way.
         </p>
       </section>
 

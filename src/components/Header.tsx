@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { categories } from "@/config/store";
+import { categories, store } from "@/config/store";
 import { cartCount, useCart } from "@/lib/cart";
 import { CartIcon, CloseIcon, MenuIcon } from "@/components/icons";
 
@@ -15,7 +15,7 @@ export function Header() {
   return (
     <>
       <div className="bg-ink px-4 py-2 text-center text-xs text-[#FFE9F0] md:text-[13px]">
-        Shipping across India <span aria-hidden>·</span> Visit us at Roongtha SSRF Mall, Nashik
+        Free shipping on ₹{store.shipping.freeAbove}+ across India <span aria-hidden>·</span> Visit us at Roongtha SSRF Mall, Nashik
       </div>
       <header className="mx-auto flex max-w-[1320px] items-center gap-4 px-2 py-2 md:gap-7 md:px-6 md:py-4">
         <button aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="flex size-11 items-center justify-center rounded-full md:hidden">

@@ -2,12 +2,17 @@ import Link from "next/link";
 import { categories } from "@/config/store";
 import { ProductCard } from "@/components/ProductCard";
 import { InStoreOnly } from "@/components/InStoreOnly";
+import { PageBanner } from "@/components/motion/PageBanner";
 import type { Product } from "@/lib/types";
 
 export function ShopGrid({ title, products, active }: { title: string; products: Product[]; active?: string }) {
   return (
     <div className="mx-auto max-w-[1320px] px-4 pt-6 md:px-6 md:pt-10">
-      <h1 className="font-display m-0 text-[44px] leading-none md:text-[72px]">{title.toUpperCase()}</h1>
+      <PageBanner
+        title={title}
+        eyebrow={categories.find((c) => c.slug === active)?.blurb ?? "Radhe Boutique, Nashik"}
+        line={products.length ? `${products.length} styles · from ₹${Math.min(...products.map((p) => p.price))}` : undefined}
+      />
       <nav aria-label="Categories" className="no-scrollbar -mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-2 md:mx-0 md:flex-wrap md:px-0">
         <Link href="/shop" className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-bold no-underline ${!active ? "bg-ink text-cream" : "border border-[#E5CCD5] bg-paper"}`}>
           All

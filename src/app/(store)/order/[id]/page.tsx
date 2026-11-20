@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { rupees } from "@/lib/pricing";
 import { waLink } from "@/lib/whatsapp";
 import type { OrderStatus } from "@/lib/types";
+import { Confetti } from "@/components/motion/Confetti";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Your order", robots: { index: false } };
@@ -28,6 +29,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
 
   return (
     <div className="mx-auto max-w-[680px] px-5 pt-10">
+      {["whatsapp_pending", "paid", "confirmed", "cod_confirmed"].includes(o.status) && <Confetti />}
       <span className="font-serif-italic text-xl text-maroon">Shukriya, {o.customer.name.split(" ")[0]}!</span>
       <h1 className="font-display m-0 mt-1 text-[48px] leading-none md:text-[64px]">{headline[o.status] ?? "YOUR ORDER"}</h1>
       <p className="mt-3 text-[15px] text-[#4A2A36]">

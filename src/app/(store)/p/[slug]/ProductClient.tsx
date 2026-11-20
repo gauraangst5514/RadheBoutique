@@ -11,6 +11,7 @@ import { waLink, waProductText } from "@/lib/whatsapp";
 import { ProductImg, pickImage } from "@/components/ProductImg";
 import { TryOnIcon } from "@/components/icons";
 import { tryOnOptions } from "@/lib/tryon";
+import { TrustStrip } from "@/components/motion/TrustStrip";
 
 const toneClass = { ok: "text-ok", warn: "text-warn", bad: "text-bad" } as const;
 
@@ -68,8 +69,11 @@ export function ProductClient({ product: p, siteUrl }: { product: Product; siteU
     <div className="grid gap-6 md:grid-cols-2 md:gap-12">
       {/* gallery */}
       <div className="flex flex-col gap-2.5">
-        <div className="relative aspect-square overflow-hidden rounded-[26px] bg-[#F3E7DF]">
-          <ProductImg p={p} img={main} className="size-full object-cover" />
+        <div className="pd-img group relative aspect-square overflow-hidden rounded-[26px] bg-[#F3E7DF]">
+          <ProductImg p={p} img={main} className="size-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110" />
+          <span aria-hidden className="lady-twinkle pointer-events-none absolute right-4 top-4 text-2xl text-gold">✦</span>
+          <span aria-hidden className="lady-twinkle pointer-events-none absolute bottom-6 right-10 text-lg text-white" style={{ animationDelay: "-1.2s" }}>✦</span>
+          <span aria-hidden className="lady-twinkle pointer-events-none absolute bottom-12 left-6 text-xl text-pink" style={{ animationDelay: "-2s" }}>✦</span>
           {main && (
             <span className="absolute left-3 top-3 rounded-full bg-paper px-2.5 py-1.5 text-xs font-bold">
               {main.kind === "cutout" ? "Studio shot" : main.kind === "lifestyle" ? "Styled shot" : "Real photo"}
@@ -100,7 +104,7 @@ export function ProductClient({ product: p, siteUrl }: { product: Product; siteU
           <h1 className="font-display m-0 text-[36px] leading-[1.02] md:text-[52px]">{p.name.toUpperCase()}</h1>
         </div>
         <div className="flex items-baseline gap-3">
-          <span className="text-[30px] font-bold text-pink">{rupees(p.price)}</span>
+          <span key={p.id} className="price-pop text-[30px] font-bold text-pink">{rupees(p.price)}</span>
           {p.mrp && p.mrp > p.price && <span className="text-lg text-muted line-through">{rupees(p.mrp)}</span>}
           <span className="text-sm text-muted">Inclusive of taxes</span>
         </div>
@@ -192,11 +196,7 @@ export function ProductClient({ product: p, siteUrl }: { product: Product; siteU
           </form>
         )}
 
-        <div className="flex flex-col gap-2 rounded-[20px] border border-line bg-paper p-4 text-sm text-[#4A2A36]">
-          <span className="text-[15px] font-bold text-ink">Delivery across India</span>
-          <span>Order on WhatsApp, we confirm everything in chat.</span>
-          <span>Or message us to pick it up at Roongtha SSRF Mall, Nashik.</span>
-        </div>
+        <TrustStrip compact />
 
         {p.description && (
           <details open className="border-b border-line pb-3">
