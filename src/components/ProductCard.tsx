@@ -9,8 +9,8 @@ export function ProductCard({ p }: { p: Product }) {
   const badge = lowestStockBadge(p);
   const colours = p.variants.length;
   return (
-    <article className="group flex flex-col gap-2 md:gap-3">
-      <Link href={`/p/${p.slug}`} className="relative block aspect-square overflow-hidden rounded-[18px] bg-[#F3E7DF] md:rounded-[22px]">
+    <article data-reveal className="pc group flex flex-col gap-2 md:gap-3">
+      <Link href={`/p/${p.slug}`} className="pc-img relative block aspect-square overflow-hidden rounded-[18px] bg-[#F3E7DF] md:rounded-[22px]">
         <ProductImg p={p} className="size-full object-cover transition-transform duration-300 group-hover:scale-105" />
         {badge ? (
           <span className={`absolute left-2 top-2 rounded-full px-2.5 py-1 text-[11px] font-bold md:left-3 md:top-3 md:text-xs ${badge === "Sold out" ? "bg-ink text-white" : "bg-maroon text-white"}`}>

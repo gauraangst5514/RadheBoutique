@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { categories, store, topReels } from "@/config/store";
 import { Hero, type HeroSlide } from "@/components/hero/Hero";
 import { KoreanHero, type WallItem } from "@/components/hero/KoreanHero";
+import { BoutiqueLady } from "@/components/motion/BoutiqueLady";
+import { Ticker } from "@/components/motion/Ticker";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductImg, pickImage } from "@/components/ProductImg";
 import type { Product } from "@/lib/types";
@@ -116,6 +118,8 @@ export default async function Home() {
         <Hero slides={slides} />
       )}
 
+      <Ticker items={["NEW DROPS EVERY WEEK", "SHIPS ALL OVER INDIA", "ORDER ON WHATSAPP", "ROONGTHA SSRF MALL, NASHIK"]} />
+
       {liveCategories.length > 1 && (
       <section className="mx-auto max-w-[1320px] px-4 pt-14 md:px-6 md:pt-[72px]">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-2 md:mb-7">
@@ -140,7 +144,7 @@ export default async function Home() {
 
       {featured.length > 0 && (
         <section className="mx-auto max-w-[1320px] px-4 pt-12 md:px-6 md:pt-14">
-          <div className="mb-5 flex items-end justify-between md:mb-7">
+          <div data-reveal className="mb-5 flex items-end justify-between md:mb-7">
             <h2 className="font-display m-0 text-[40px] leading-none md:text-[64px]">INSTAGRAM PE HIT</h2>
             <Link href="/shop" className="text-sm font-bold md:text-[15px]">View all</Link>
           </div>
@@ -152,8 +156,10 @@ export default async function Home() {
         </section>
       )}
 
+      <BoutiqueLady />
+
       {hasKurtis ? (
-        <section className="mx-auto max-w-[1320px] px-3 pt-12 md:px-6 md:pt-14">
+        <section data-reveal className="mx-auto max-w-[1320px] px-3 pt-12 md:px-6 md:pt-14">
           <div className="flex flex-col gap-4 rounded-[28px] bg-saffron p-6 text-[#3B1406] md:flex-row md:items-center md:gap-10 md:rounded-[32px] md:p-14">
             <div className="flex flex-1 flex-col gap-3">
               <span className="font-serif-italic text-xl md:text-2xl">Kurti combo</span>
@@ -168,7 +174,7 @@ export default async function Home() {
           </div>
         </section>
       ) : korean.length > 0 ? (
-        <section className="mx-auto max-w-[1320px] px-3 pt-12 md:px-6 md:pt-14">
+        <section data-reveal className="mx-auto max-w-[1320px] px-3 pt-12 md:px-6 md:pt-14">
           <div className="relative flex flex-col gap-6 overflow-hidden rounded-[28px] bg-saffron p-6 text-[#3B1406] md:flex-row md:items-center md:gap-10 md:rounded-[32px] md:p-14">
             <div className="flex flex-1 flex-col gap-3">
               <span className="font-serif-italic text-xl md:text-2xl">Korean earrings</span>
@@ -199,7 +205,7 @@ export default async function Home() {
       ) : null}
 
       {tryOnStar ? (
-        <section className="mx-auto max-w-[1320px] px-3 pt-5 md:px-6 md:pt-6">
+        <section data-reveal className="mx-auto max-w-[1320px] px-3 pt-5 md:px-6 md:pt-6">
           <div className="flex items-center gap-5 rounded-[28px] bg-maroon p-6 text-[#FFF1E0] md:gap-12 md:rounded-[32px] md:p-14">
             <div className="arch hidden h-[220px] w-[170px] shrink-0 items-center justify-center border-2 border-gold bg-[#4A0A1A] sm:flex">
               <svg width="70%" viewBox="0 0 160 200" fill="none" stroke="#E9B949" strokeWidth="3" strokeDasharray="5 7" aria-hidden>
@@ -222,7 +228,7 @@ export default async function Home() {
           </div>
         </section>
       ) : (
-        <section className="mx-auto max-w-[1320px] px-3 pt-5 md:px-6 md:pt-6">
+        <section data-reveal className="mx-auto max-w-[1320px] px-3 pt-5 md:px-6 md:pt-6">
           <div className="flex items-center gap-5 rounded-[28px] bg-maroon p-6 text-[#FFF1E0] md:gap-12 md:rounded-[32px] md:p-14">
             <div className="arch hidden h-[220px] w-[170px] shrink-0 items-center justify-center border-2 border-gold bg-[#4A0A1A] sm:flex">
               <svg width="62%" viewBox="0 0 120 120" fill="none" stroke="#E9B949" strokeWidth="3" strokeLinejoin="round" aria-hidden>
@@ -247,7 +253,9 @@ export default async function Home() {
         </section>
       )}
 
-      <section className="pt-12 md:mx-auto md:max-w-[1320px] md:px-6 md:pt-14">
+      <Ticker tone="gold" tilt={1.2} items={["PEHNO ROZ", "CHAMKO ROZ", "PEARLS", "BOWS", "HEARTS", "JHUMKAS", "ANTI-TARNISH"]} />
+
+      <section data-reveal className="pt-4 md:mx-auto md:max-w-[1320px] md:px-6 md:pt-14">
         <div className="mb-4 flex items-end justify-between px-4 md:mb-6 md:px-0">
           <h2 className="font-display m-0 text-[40px] leading-none md:text-[64px]">ON THE REELS</h2>
           <a href={store.instagram} target="_blank" rel="noopener noreferrer" className="text-sm font-bold md:text-[15px]">@{store.instagramHandle}</a>

@@ -145,3 +145,46 @@ body {
   .iso-awning, .iso-sign, .iso-twinkle, .iso-reel, .iso-heart { animation: none; }
   .iso-pop { animation: none; opacity: 1; }
 }
+
+/* ---------- Site-wide motion (src/components/motion/*) ---------- */
+/* Scroll reveal: hidden only once RevealOnScroll has added .reveal-ready, so no-JS users see everything. */
+.reveal-ready [data-reveal] { opacity: 0; transform: translateY(34px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal-ready [data-reveal].is-in { opacity: 1; transform: none; }
+.reveal-ready .grid > .pc:nth-child(4n+2) { transition-delay: .07s; }
+.reveal-ready .grid > .pc:nth-child(4n+3) { transition-delay: .14s; }
+.reveal-ready .grid > .pc:nth-child(4n+4) { transition-delay: .21s; }
+
+/* Product cards: a soft shine sweeps across the photo on hover. */
+.pc-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%); transform: translateX(-120%); transition: transform .8s ease; pointer-events: none; }
+.pc:hover .pc-img::after { transform: translateX(120%); }
+
+/* Cart badge pops when something is added. */
+.cart-pop { animation: cart-pop .5s cubic-bezier(.3,1.6,.5,1); }
+@keyframes cart-pop { 0% { transform: scale(.3); } 60% { transform: scale(1.35); } 100% { transform: scale(1); } }
+
+/* Boutique lady illustration. */
+.lady-jhumka { animation: lady-swing 2.2s ease-in-out infinite; }
+@keyframes lady-swing { 0%, 100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+.lady-dupatta { transform-origin: 130px 152px; animation: lady-flutter 3.6s ease-in-out infinite; }
+@keyframes lady-flutter { 0%, 100% { transform: skewX(0deg) rotate(0deg); } 50% { transform: skewX(-4deg) rotate(2.5deg); } }
+.lady-dupatta-back { transform-origin: 204px 158px; animation: lady-flutter-back 4.2s ease-in-out infinite; }
+@keyframes lady-flutter-back { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-4deg) skewX(3deg); } }
+.lady-bun { transform-origin: 190px 66px; }
+.lady-petal { animation: lady-fall 10s linear infinite; }
+@keyframes lady-fall {
+  0% { transform: translate(0, -20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(40px, 300px) rotate(220deg); }
+  90% { opacity: 1; }
+  100% { transform: translate(-10px, 640px) rotate(420deg); opacity: 0; }
+}
+.lady-twinkle { animation: iso-twinkle 2.8s ease-in-out infinite; }
+
+/* Footer jhumkas. */
+.foot-jhumka { transform-origin: 13px 0; animation: lady-swing 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lady-jhumka, .lady-dupatta, .lady-dupatta-back, .lady-petal, .lady-twinkle, .foot-jhumka, .cart-pop { animation: none; }
+  .lady-petal { display: none; }
+  .pc-img::after { display: none; }
+}

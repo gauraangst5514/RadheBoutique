@@ -35,7 +35,7 @@ export function Header() {
         <Link href="/cart" aria-label={`Cart, ${count} items`} className="relative flex size-11 items-center justify-center rounded-full">
           <CartIcon />
           {count > 0 && (
-            <span className="absolute right-0.5 top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-maroon px-1 text-[11px] font-bold text-white">
+            <span key={count} className="cart-pop absolute right-0.5 top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-maroon px-1 text-[11px] font-bold text-white">
               {count}
             </span>
           )}

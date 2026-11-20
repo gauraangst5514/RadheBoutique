@@ -4,8 +4,21 @@ import { waLink } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
-    <footer className="mt-20 bg-ink text-[#FBE8EF]">
-      <div className="mx-auto flex max-w-[1320px] flex-wrap justify-between gap-12 px-5 pb-10 pt-14 md:px-6">
+    <footer className="relative mt-24 bg-ink text-[#FBE8EF]">
+      {/* jhumkas hanging from the top edge */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 mx-auto flex max-w-[1320px] justify-end gap-6 px-8 md:gap-10 md:px-16">
+        {[{ h: 18, d: "0s" }, { h: 34, d: "-.8s" }, { h: 8, d: "-1.6s" }].map((j, k) => (
+          <svg key={k} width="26" height={j.h + 34} viewBox={`0 0 26 ${j.h + 34}`} className="foot-jhumka" style={{ animationDelay: j.d }}>
+            <line x1="13" y1="0" x2="13" y2={j.h} stroke="#E9B949" strokeWidth="2" />
+            <circle cx="13" cy={j.h + 2} r="4" fill="#E9B949" />
+            <path d={`M2 ${j.h + 20} a11 11 0 0 1 22 0 z`} fill="#E9B949" />
+            <circle cx="5" cy={j.h + 25} r="2.2" fill="#C81E63" />
+            <circle cx="13" cy={j.h + 28} r="2.2" fill="#C81E63" />
+            <circle cx="21" cy={j.h + 25} r="2.2" fill="#C81E63" />
+          </svg>
+        ))}
+      </div>
+      <div className="mx-auto flex max-w-[1320px] flex-wrap justify-between gap-12 px-5 pb-10 pt-[88px] md:px-6">
         <div className="flex max-w-[400px] flex-1 basis-[320px] flex-col gap-3.5">
           <span className="font-serif-italic text-[30px] font-bold text-blush md:text-[34px]">{store.name}</span>
           <p className="m-0 text-[15px] leading-relaxed md:text-base">{store.address}</p>
