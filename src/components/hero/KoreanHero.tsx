@@ -62,13 +62,13 @@ export function KoreanHero({ items, href, startPrice, count, whatsapp }: { items
             <span className="kh-dot size-2 rounded-full bg-gold" /> NEW DROP · {count} STYLES
           </span>
           <h1 className="font-display kh-in m-0 text-[72px] leading-[.86] tracking-tight md:text-[132px] lg:text-[150px]" style={{ animationDelay: "80ms" }}>
-            EAR
+            SHINE
             <br />
-            <span className="kh-outline">CANDY</span>
+            <span className="kh-outline">DAILY</span>
             <span className="font-serif-italic ml-2 inline-block whitespace-nowrap align-top text-[26px] font-semibold normal-case tracking-normal text-pink md:ml-3 md:text-[44px]">from ₹{startPrice}</span>
           </h1>
           <p className="kh-in m-0 max-w-[400px] text-[15px] leading-relaxed md:text-lg" style={{ animationDelay: "160ms" }}>
-            The earrings everyone&apos;s wearing: pearls, bows, tulips and hearts. Light enough for all day, priced from <b>₹{startPrice}</b>.
+            Trendy jewellery for every day and every outfit. Light, pretty and priced from <b>₹{startPrice}</b>.
           </p>
           <div className="kh-in flex gap-2.5" style={{ animationDelay: "240ms" }}>
             <Link href={href} className="group flex items-center gap-2 rounded-full bg-maroon px-6 py-3.5 text-[15px] font-bold text-blush no-underline md:px-7 md:py-4 md:text-base">
