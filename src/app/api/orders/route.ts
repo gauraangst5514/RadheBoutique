@@ -5,6 +5,7 @@ import { razorpay, razorpayEnabled } from "@/lib/razorpay";
 import { waLink } from "@/lib/whatsapp";
 import { rupees } from "@/lib/pricing";
 import { store } from "@/config/store";
+import { siteUrl } from "@/lib/site";
 
 export async function POST(req: Request) {
   const parsed = orderRequestSchema.safeParse(await req.json().catch(() => null));
@@ -61,9 +62,13 @@ export async function POST(req: Request) {
 
     // WhatsApp: record the order, the shop confirms it in chat and then marks it confirmed in admin.
     const order = await db.createOrder({ ...base, status: "whatsapp_pending", stockApplied: false });
+    // Full product links, so WhatsApp shows the (first) product's photo as a preview card.
+    const site = siteUrl(req);
+    const slugs = new Map((await db.getProductsByIds(items.map((i) => i.productId))).map((p) => [p.id, p.slug]));
+    const link = (id: string) => (site && slugs.get(id) ? `\n  ${site}/p/${slugs.get(id)}` : "");
     const text =
       `Hi Radhe Boutique! Order ${order.number}\n` +
-      items.map((i) => `• ${i.name} (${i.variantName}) × ${i.qty} – ${rupees(i.unitPrice * i.qty)}`).join("\n") +
+      items.map((i) => `• ${i.name} (${i.variantName}) × ${i.qty} – ${rupees(i.unitPrice * i.qty)}${link(i.productId)}`).join("\n") +
       (totals.discount ? `\nCombo discount: −${rupees(totals.discount)}` : "") +
       `\nTotal: ${rupees(totals.total)}\n\n${customer.name}, ${customer.phone}\n${customer.address}, ${customer.city}, ${customer.state} ${customer.pincode}`;
     return NextResponse.json({ orderId: order.id, whatsappUrl: waLink(text) });

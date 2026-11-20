@@ -1,9 +1,12 @@
 import { requireAdminPage } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { headers } from "next/headers";
+import { siteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
 export default async function Restock() {
+  const site = siteUrl(await headers());
   await requireAdminPage();
   const [reqs, products] = await Promise.all([db.listRestockRequests(), db.listProducts({ includeInactive: true })]);
   const find = (pid: string, vid: string) => {
@@ -18,7 +21,7 @@ export default async function Restock() {
       <ul className="m-0 flex list-none flex-col gap-2 p-0">
         {reqs.map((r) => {
           const { p, v } = find(r.productId, r.variantId);
-          const text = p ? `Hi! ${p.name}${v ? ` (${v.name})` : ""} is back in stock at Radhe Boutique: ${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/p/${p.slug}` : "Hi! Your item is back in stock.";
+          const text = p ? `Hi! ${p.name}${v ? ` (${v.name})` : ""} is back in stock at Radhe Boutique: ${site}/p/${p.slug}` : "Hi! Your item is back in stock.";
           return (
             <li key={r.id} className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-line bg-paper p-3.5 text-sm">
               <span>

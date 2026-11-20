@@ -14,7 +14,7 @@ import { tryOnOptions } from "@/lib/tryon";
 
 const toneClass = { ok: "text-ok", warn: "text-warn", bad: "text-bad" } as const;
 
-export function ProductClient({ product: p }: { product: Product }) {
+export function ProductClient({ product: p, siteUrl }: { product: Product; siteUrl: string }) {
   const router = useRouter();
   const add = useCart((s) => s.add);
   const firstInStock = Math.max(0, p.variants.findIndex((v) => v.stock > 0));
@@ -62,7 +62,7 @@ export function ProductClient({ product: p }: { product: Product }) {
     setNotify(res.ok ? "done" : "error");
   }
 
-  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/p/${p.slug}`;
+  const pageUrl = `${siteUrl}/p/${p.slug}`;
 
   return (
     <div className="grid gap-6 md:grid-cols-2 md:gap-12">

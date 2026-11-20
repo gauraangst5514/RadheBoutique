@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { siteUrl } from "@/lib/site";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { categoryName } from "@/config/store";
@@ -16,7 +18,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: p.name,
     description: `${p.name} for ₹${p.price}. ${p.description}`.slice(0, 160),
-    openGraph: img ? { images: [img.url] } : undefined,
+    openGraph: {
+      title: `${p.name} – ₹${p.price}`,
+      description: p.description.slice(0, 160),
+      type: "website",
+      images: img ? [{ url: img.url, alt: p.name }] : undefined,
+    },
   };
 }
 
@@ -31,7 +38,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted">
         <Link href="/shop" className="text-muted">Shop</Link> / <Link href={`/shop/${p.category}`} className="text-muted">{categoryName(p.category)}</Link>
       </nav>
-      <ProductClient product={p} />
+      <ProductClient product={p} siteUrl={siteUrl(await headers())} />
       {related.length > 0 && (
         <section className="mt-16">
           <h2 className="font-display m-0 mb-5 text-[34px] leading-none md:text-[48px]">COMPLETE THE LOOK</h2>
